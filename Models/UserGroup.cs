@@ -2,20 +2,22 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BUMS.Models{
-    public class UserGroup{
-        [Display(Name = "User group id")]
-        public int UserGroupID {get;set;}
-        [Display(Name = "User id")]
-        public int UserID {get;set;}
-        [Display(Name = "Group id")]
-        public int GroupID{get;set;}
-        [Display(Name = "Access id")]
-        public int AccessID{get;set;}
+    //public class UserGroup{
+    //    public int UserGroupID {get;set;}
 
+        //[Column("User_Id")]
+        //public int UserID {get;set;}
+        //[Column("Group_Id")]
+        //public int GroupID{get;set;}
+        //[Column("Access_Id")]
+        //public int AccessID{get;set;}
+
+        //[ForeignKey(nameof(UserID))]
+        //[InverseProperty(nameof(User.UserUserGroups))]
         //public virtual UserGroup UserUserGroupNavigation {get;set;}
 
         //public virtual Access AccessUserGroupNavigation {get;set;}
 
         //public virtual Group GroupUserGroupNavigation {get;set;}
-    }
+    //}
 }

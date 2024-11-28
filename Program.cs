@@ -1,3 +1,5 @@
+using BUMS.Models;
+
 namespace BUMS
 {
     public class Program
@@ -8,6 +10,7 @@ namespace BUMS
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<BUMSDbContext>();
 
             var app = builder.Build();
 

@@ -3,15 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BUMS.Models{
     public class User{
-        [Display(Name = "User id")]
         public int UserID {get;set;}
-        [Display(Name = "User name")]
+
+        [Required]
+        [Column("User_Name")]
         public string UserName {get;set;}
-        [Display(Name = "Created at")]
+
+        [Column("Created_At")]
         public DateTime CreatedAt {get;set;}
-        [Display(Name = "Created by")]
+
+        [Column("Created_By")]
         public User CreatedBy {get;set;}
 
-        public virtual ICollection<UserGroup> UserUserGroups {get;set;}
+        //public virtual ICollection<UserGroup> UserUserGroups { get; set; }
     }
 }
