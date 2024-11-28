@@ -26,6 +26,8 @@ namespace BUMS
                 return Page();
             }
             //service.AddUser(user);
+            user.CreatedAt = DateTime.Now;
+            user.CreatedBy = new User() {UserName = "Miki"};
             return RedirectToPage("GetUser");
         }
       

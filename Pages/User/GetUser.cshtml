@@ -1,12 +1,15 @@
 ﻿@page
-@model BUMS.GetUserModel
+@model GetUserModel
 @{
+    ViewData["Title"] = "User list";
 }
 
 <h1>List of Users</h1>
+@if(Model.IsAdmin){
 <p>
     <a asp-page="/User/CreateUser">Create New User</a>
 </p>
+}
 <form>
     <p>
         Search: <input type="text" asp-for="FilterCriteria" />
@@ -25,17 +28,21 @@
 
         @if (Model != null)
         {
-            @foreach (var item in Model.Users)
-            {
-                <tr>
-                    <td> @item.UserName/td>
-                    <td>  @item.UserID </td>
-                    <td>
-                        <p>
-                            <a asp-page="/User/DeleteUser" asp-route-id="@item.UserID">Delete user</a>
-                        </p>
-                    </td>
-                </tr>
-            }
+        @foreach (var item in Model.Users)
+        {
+        <tr>
+            <td> @item.UserName</td>
+            <td>  @item.UserID </td>
+            <td>
+                @if(Model.IsAdmin){
+            <td> @item.CreatedBy</td>
+            <td> @item.CreatedAt</td>
+                <p>
+                    <a asp-page="/User/DeleteUser" asp-route-id="@item.UserID">Delete user</a>
+                </p>
+                }
+            </td>
+        </tr>
+        }
         }
 </table>

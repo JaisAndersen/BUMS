@@ -1,19 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BUMS.Models
-{
-    [Table("Group")]
-    public class Group
-    {
-        [Key]
-        [Column("Group_Id")]
+namespace BUMS.Models{
+    public class Group{
+        [Display(Name = "Group id")]
         public int GroupID { get; set; }
-        [Column("Group_Name")]
+        [Display(Name = "Group name")]
         public string GroupName { get; set; }
-        [Column("Created_At")]
+        [Display(Name = "Created at")]
         public DateTime CreatedAt { get; set; }
-        [Column("Created_By")]
+        [Display(Name = "Created by")]
         public User CreatedBy { get; set; }
 
         public virtual ICollection<UserGroup> GroupUserGroups {get;set;}

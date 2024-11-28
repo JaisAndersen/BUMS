@@ -1,21 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BUMS.Models
-{
-    [Table("Access")]
-        public class Access
-    {
-        public Access() { }
+namespace BUMS.Models{
+        public class Access{
+        [Display(Name = "Access id")]
+        public int AccessID { get; set; }
         [Required]
-        [Key]
-        [Column("Access_id")]
-        public string AccessID { get; set; }
-
-        [Column("Access_Name")]
+        [Display(Name = "Access name")]
         public string AccessName { get; set; }
-
-        [Column("System_Name")]
+        [Required]
+        [Display(Name = "System name")]
         public string SystemName { get; set; }
 
         public virtual ICollection<UserGroup> AccessUserGroups {get;set;}
