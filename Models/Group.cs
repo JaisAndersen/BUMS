@@ -5,8 +5,7 @@ namespace BUMS.Models
 {
     public class Group
     {
-        public int GroupID { get; set; }
-        [Column("Group_Name")]
+        public int GroupId { get; set; }
         public string GroupName { get; set; }
         [Column("Created_At")]
         public DateTime CreatedAt { get; set; }

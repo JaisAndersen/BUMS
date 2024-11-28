@@ -1,0 +1,40 @@
+﻿@page
+@model BUMS.Pages.Group.GetGroupModel
+@{
+    ViewData["Title"] = "GetGroup";
+}
+
+<h3>List of Groups</h3>
+<p>
+    <a asp-page="/Group/CreateGroup">Create New Group</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Group Id</th>
+            <th>Name</th>
+            <th>CreatedAt</th>
+            <th>CreatedBy</th>
+            <th></th>            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model.Groups)
+            {
+                <tr>
+                    <td>@item.GroupId</td>
+                    <td>@item.GroupName</td>
+                    <td>@item.CreatedAt</td>
+                    <td>@item.CreatedBy</td>                    
+                    <td>
+                        <p>
+                            <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
+                        </p>
+                    </td>
+                </tr>
+            }
+        }
+</table>
+

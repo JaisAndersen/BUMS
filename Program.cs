@@ -1,4 +1,6 @@
 using BUMS.Models;
+using BUMS.Services.Interfaces;
+using BUMS.Services;
 
 namespace BUMS
 {
@@ -10,6 +12,7 @@ namespace BUMS
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddDbContext<BUMSDbContext>();
 
             var app = builder.Build();
