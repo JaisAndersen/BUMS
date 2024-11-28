@@ -9,11 +9,9 @@ namespace BUMS.Models{
         [Column("User_Name")]
         public string UserName {get;set;}
 
-        [Column("Created_At")]
-        public DateTime CreatedAt {get;set;}
+        public DateTime CreatedAt { get; set; }
 
-        [Column("Created_By")]
-        public User CreatedBy {get;set;}
+        //public User CreatedBy { get; set; }
 
         //public virtual ICollection<UserGroup> UserUserGroups { get; set; }
     }
