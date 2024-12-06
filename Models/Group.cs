@@ -19,10 +19,16 @@ namespace BUMS.Models
         [Display(Name = "Created by")]
         public int CreatedBy { get; set; }
 
+
         [Display(Name = "AccessType")]
         [EnumDataType(typeof(AccessType))]
         [Required]
         public AccessType AccessType {get;set;}
+
+        public int AccessId {get;set;}
+        public Access Access {get;set;}
+
+
         //public ICollection<UserGroup> UserGroups { get; set; }
     }
 }

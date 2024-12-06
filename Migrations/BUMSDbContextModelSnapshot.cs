@@ -32,24 +32,29 @@ namespace BUMS.Migrations
 
                     b.Property<string>("AccessName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("SystemName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("AccessID");
 
-                    b.ToTable("Accesss", (string)null);
+                    b.ToTable("Accesss");
                 });
 
             modelBuilder.Entity("BUMS.Models.Group", b =>
                 {
-                    b.Property<int>("GroupID")
+                    b.Property<int>("GroupId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupId"));
+
+                    b.Property<int>("AccessId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -59,11 +64,14 @@ namespace BUMS.Migrations
 
                     b.Property<string>("GroupName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("GroupID");
+                    b.HasKey("GroupId");
 
-                    b.ToTable("Groups", (string)null);
+                    b.HasIndex("AccessId");
+
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("BUMS.Models.User", b =>
@@ -82,11 +90,12 @@ namespace BUMS.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("UserID");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BUMS.Models.UserGroup", b =>
@@ -97,9 +106,6 @@ namespace BUMS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserGroupID"));
 
-                    b.Property<int>("AccessID")
-                        .HasColumnType("int");
-
                     b.Property<int>("GroupID")
                         .HasColumnType("int");
 
@@ -108,36 +114,37 @@ namespace BUMS.Migrations
 
                     b.HasKey("UserGroupID");
 
-                    b.HasIndex("AccessID");
-
                     b.HasIndex("GroupID");
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("UserGroups", (string)null);
+                    b.ToTable("UserGroups");
+                });
+
+            modelBuilder.Entity("BUMS.Models.Group", b =>
+                {
+                    b.HasOne("BUMS.Models.Access", "Access")
+                        .WithMany("Groups")
+                        .HasForeignKey("AccessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Access");
                 });
 
             modelBuilder.Entity("BUMS.Models.UserGroup", b =>
                 {
-                    b.HasOne("BUMS.Models.Access", "Access")
-                        .WithMany("UserGroups")
-                        .HasForeignKey("AccessID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BUMS.Models.Group", "Group")
-                        .WithMany("UserGroups")
+                        .WithMany()
                         .HasForeignKey("GroupID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BUMS.Models.User", "User")
-                        .WithMany("UserGroups")
+                        .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Access");
 
                     b.Navigation("Group");
 
@@ -146,17 +153,7 @@ namespace BUMS.Migrations
 
             modelBuilder.Entity("BUMS.Models.Access", b =>
                 {
-                    b.Navigation("UserGroups");
-                });
-
-            modelBuilder.Entity("BUMS.Models.Group", b =>
-                {
-                    b.Navigation("UserGroups");
-                });
-
-            modelBuilder.Entity("BUMS.Models.User", b =>
-                {
-                    b.Navigation("UserGroups");
+                    b.Navigation("Groups");
                 });
 #pragma warning restore 612, 618
         }

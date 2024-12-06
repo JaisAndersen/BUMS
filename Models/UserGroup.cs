@@ -10,6 +10,7 @@ namespace BUMS.Models
         public User User { get; set; }
         public int GroupID { get; set; }
         public Group Group { get; set; }
+
         public int AccessID { get; set; }
         public Access Access { get; set; }
         
@@ -22,5 +23,6 @@ namespace BUMS.Models
         //[ForeignKey(nameof(GroupID))]
         //[InverseProperty(nameof(Group.GroupUserGroups))]
         //public virtual Group GroupUserGroupNavigation {get;set;}
+
     }
 }
