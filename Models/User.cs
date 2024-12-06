@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BUMS.Models
@@ -18,6 +19,7 @@ namespace BUMS.Models
         [Display(Name = "Created by")]
         public int CreatedBy { get; set; }
 
-        //public ICollection<UserGroup> UserGroups { get; set; }
+        [ValidateNever]
+        public virtual ICollection<UserGroup> UserGroup { get; set; }
     }
 }
