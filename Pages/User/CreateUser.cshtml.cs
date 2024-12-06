@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BUMS.Models;
+using BUMS.Services.Interfaces;
 using System;
 
 
@@ -9,7 +10,7 @@ namespace BUMS
     public class CreateUserModel : PageModel
     {
         [BindProperty]
-        public User user { get; set; }
+        public User User { get; set; }
 
         IUserService service;
         public CreateUserModel(IUserService service)
@@ -25,11 +26,13 @@ namespace BUMS
             {
                 return Page();
             }
-            //service.AddUser(user);
-            user.CreatedAt = DateTime.Now;
-            user.CreatedBy = new User() {UserName = "Miki"};
+            else
+            {
+                User.CreatedAt = DateTime.Now;
+                User.CreatedBy = 1;
+                service.AddUser(User);
+            }            
             return RedirectToPage("GetUser");
-        }
-      
+        }      
     }
 }

@@ -14,5 +14,7 @@ namespace BUMS
         public IEnumerable<User> GetUser(string filter);
 
         public IEnumerable<User> GetUser();
+
+        public void UpdateUser(User user, string UserName);
     }    
 }

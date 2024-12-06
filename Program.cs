@@ -14,6 +14,8 @@ namespace BUMS
             builder.Services.AddRazorPages();
             builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddDbContext<BUMSDbContext>();
+            builder.Services.AddTransient<IUserService, UserService>();
+            
 
             var app = builder.Build();
 

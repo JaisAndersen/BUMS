@@ -1,15 +1,13 @@
 ﻿@page
-@model GetUserModel
+@model BUMS.GetUserModel
 @{
-    ViewData["Title"] = "User list";
+    ViewData["Title"] = "Users";
 }
 
-<h1>List of Users</h1>
-@if(Model.IsAdmin){
+<h3>List of Users</h3>
 <p>
     <a asp-page="/User/CreateUser">Create New User</a>
 </p>
-}
 <form>
     <p>
         Search: <input type="text" asp-for="FilterCriteria" />
@@ -20,29 +18,37 @@
 <table class="table">
     <thead>
         <tr>
-            <th> Name </th>
-            <th> ID </th>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 
         @if (Model != null)
         {
-        @foreach (var item in Model.Users)
-        {
-        <tr>
-            <td> @item.UserName</td>
-            <td>  @item.UserID </td>
-            <td>
-                @if(Model.IsAdmin){
-            <td> @item.CreatedBy</td>
-            <td> @item.CreatedAt</td>
-                <p>
-                    <a asp-page="/User/DeleteUser" asp-route-id="@item.UserID">Delete user</a>
-                </p>
-                }
-            </td>
-        </tr>
-        }
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>@item.UserID</td>
+                    <td>@item.UserName</td>
+                    <td>@item.CreatedAt</td>
+                    <td>@item.CreatedBy</td>
+                   @* <td>  @item.UserGroups </td> Denne skal vise gruppen useren er i *@
+                    <td>
+                        <p>
+                            <a asp-page="/User/UpdateUser" asp-route-id="@item.UserID">Update</a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a asp-page="/User/DeleteUser" asp-route-id="@item.UserID">Delete</a>
+                        </p>
+                    </td>
+                </tr>
+            }
         }
 </table>

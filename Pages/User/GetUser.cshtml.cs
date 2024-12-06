@@ -15,12 +15,15 @@ namespace BUMS{
             this.service = service;
         }
         public IEnumerable<User> Users { get; set; } = new List<User>();
-        public void OnGet(){
-            if (!String.IsNullOrEmpty(FilterCriteria)){
-                Users = service.GetUser(FilterCriteria);
+        public void OnGet()
+        {
+            if (!String.IsNullOrEmpty(FilterCriteria))
+            {
+                Users = userService.GetUser(FilterCriteria);
             }
-            else{
-                Users = service.GetUser();
+            else
+            {
+                Users = userService.GetUser();
             }
         }
     }

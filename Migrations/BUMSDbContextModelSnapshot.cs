@@ -40,7 +40,7 @@ namespace BUMS.Migrations
 
                     b.HasKey("AccessID");
 
-                    b.ToTable("Accesss");
+                    b.ToTable("Accesss", (string)null);
                 });
 
             modelBuilder.Entity("BUMS.Models.Group", b =>
@@ -63,7 +63,7 @@ namespace BUMS.Migrations
 
                     b.HasKey("GroupID");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Groups", (string)null);
                 });
 
             modelBuilder.Entity("BUMS.Models.User", b =>
@@ -86,7 +86,7 @@ namespace BUMS.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BUMS.Models.UserGroup", b =>
@@ -114,7 +114,7 @@ namespace BUMS.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("UserGroups");
+                    b.ToTable("UserGroups", (string)null);
                 });
 
             modelBuilder.Entity("BUMS.Models.UserGroup", b =>

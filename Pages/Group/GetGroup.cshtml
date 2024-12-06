@@ -1,21 +1,29 @@
 ﻿@page
-@model BUMS.Pages.Group.GetGroupModel
+@model BUMS.GetGroupModel
 @{
-    ViewData["Title"] = "GetGroup";
+    ViewData["Title"] = "Groups";
 }
 
 <h3>List of Groups</h3>
 <p>
     <a asp-page="/Group/CreateGroup">Create New Group</a>
 </p>
+<form>
+    <p>
+        Search: <input type="text" asp-for="FilterCriteria"/>
+        <input type="submit" value="Filter" />
+        <a asp-page="/User/GetUser">Back to Full List</a>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
-            <th>Group Id</th>
+            <th>Group ID</th>
             <th>Name</th>
-            <th>CreatedAt</th>
-            <th>CreatedBy</th>
-            <th></th>            
+            <th>Created At</th>
+            <th>Created By</th>
+            <th></th>     
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +35,12 @@
                     <td>@item.GroupId</td>
                     <td>@item.GroupName</td>
                     <td>@item.CreatedAt</td>
-                    <td>@item.CreatedBy</td>                    
+                    <td>@item.CreatedBy</td>
+                    <td>
+                        <p>
+                            <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
+                        </p>
+                    </td>
                     <td>
                         <p>
                             <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
