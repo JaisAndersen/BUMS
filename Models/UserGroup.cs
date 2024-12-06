@@ -22,5 +22,5 @@ namespace BUMS.Models
         //[ForeignKey(nameof(GroupID))]
         //[InverseProperty(nameof(Group.GroupUserGroups))]
         //public virtual Group GroupUserGroupNavigation {get;set;}
-    //}
+    }
 }

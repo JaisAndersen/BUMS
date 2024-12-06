@@ -37,8 +37,13 @@ namespace BUMS{
         }
         public IEnumerable<User> GetUser()
         {
-            return null;
-            //return context.User;
+            
+            return context.Users;
+        }
+
+        public void UpdateUser(User user, string UserName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

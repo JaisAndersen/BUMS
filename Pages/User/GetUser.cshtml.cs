@@ -19,11 +19,11 @@ namespace BUMS{
         {
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
-                Users = userService.GetUser(FilterCriteria);
+                Users = service.GetUser(FilterCriteria);
             }
             else
             {
-                Users = userService.GetUser();
+                Users = service.GetUser();
             }
         }
     }
