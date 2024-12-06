@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BUMS.Models;
 using BUMS.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BUMS
 {
@@ -9,7 +10,11 @@ namespace BUMS
     {
         [BindProperty]
         public Group Group { get; set; }
-        IGroupService groupService;
+
+        private IGroupService groupService;
+
+        public SelectList SelectListAccessType {get;set;}
+
         public CreateGroupModel(IGroupService service)
         {
             this.groupService = service;
