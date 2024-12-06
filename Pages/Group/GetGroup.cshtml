@@ -22,7 +22,7 @@
             <th>Name</th>
             <th>Created At</th>
             <th>Created By</th>
-            <th></th>     
+            <th>Access Type</th>     
             <th></th>
         </tr>
     </thead>
@@ -36,6 +36,7 @@
                     <td>@item.GroupName</td>
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
+                    <td>@item.AccessType</td>
                     <td>
                         <p>
                             <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
