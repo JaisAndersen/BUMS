@@ -10,5 +10,6 @@ namespace BUMS.Services.Interfaces
         public Group GetGroupById(int ID);
         public IEnumerable<Group> FilterGroupByName(string filter);
         public void UpdateGroup(Group group, string GroupName);
+        public List<Access> GetAllAccess();
     }
 }

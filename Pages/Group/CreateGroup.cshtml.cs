@@ -13,23 +13,28 @@ namespace BUMS
 
         private IGroupService groupService;
 
-        public SelectList SelectListAccessType {get;set;}
+        public SelectList SelectListAccess {get;set;}
 
         public CreateGroupModel(IGroupService service)
         {
             this.groupService = service;
         }        
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            SelectListAccess = new SelectList(groupService.GetAllAccess(),"AccessID","Access");
+            return Page();
         }
         public IActionResult OnPost(){
-            if (!ModelState.IsValid){
+            SelectListAccess = new SelectList(groupService.GetAllAccess(), "AccessID", "Access");
+            if (!ModelState.IsValid)
+            {
                 return Page();
             }
-            else{
-
+            else
+            {
                 Group.CreatedAt = DateTime.Now;
                 Group.CreatedBy = 1;
+                Group.Access = (Access)SelectListAccess.SelectedValue;
                 groupService.AddGroup(Group);
             }
             return RedirectToPage("GetGroup");

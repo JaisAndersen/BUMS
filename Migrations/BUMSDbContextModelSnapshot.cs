@@ -53,7 +53,7 @@ namespace BUMS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupId"));
 
-                    b.Property<int>("AccessId")
+                    b.Property<int>("AccessID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -69,7 +69,7 @@ namespace BUMS.Migrations
 
                     b.HasKey("GroupId");
 
-                    b.HasIndex("AccessId");
+                    b.HasIndex("AccessID");
 
                     b.ToTable("Groups");
                 });
@@ -106,7 +106,7 @@ namespace BUMS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserGroupID"));
 
-                    b.Property<int>("GroupID")
+                    b.Property<int>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
@@ -114,7 +114,7 @@ namespace BUMS.Migrations
 
                     b.HasKey("UserGroupID");
 
-                    b.HasIndex("GroupID");
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("UserID");
 
@@ -125,7 +125,7 @@ namespace BUMS.Migrations
                 {
                     b.HasOne("BUMS.Models.Access", "Access")
                         .WithMany("Groups")
-                        .HasForeignKey("AccessId")
+                        .HasForeignKey("AccessID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -136,7 +136,7 @@ namespace BUMS.Migrations
                 {
                     b.HasOne("BUMS.Models.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("GroupID")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
