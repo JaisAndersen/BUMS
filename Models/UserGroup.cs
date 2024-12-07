@@ -13,8 +13,8 @@ namespace BUMS.Models
         [Required]
         public Group Group { get; set; }
 
-        //public int AccessID { get; set; }
-        //public Access Access { get; set; }
+      //  public int AccessID { get; set; }
+      //  public Access Access { get; set; }
         
        
 
