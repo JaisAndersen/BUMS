@@ -21,20 +21,19 @@ namespace BUMS
         }        
         public IActionResult OnGet()
         {
-            SelectListAccess = new SelectList(groupService.GetAllAccess(),"AccessID","Access");
+            SelectListAccess = new SelectList(groupService.GetAllAccess(), "AccessID", "AccessName");
             return Page();
         }
         public IActionResult OnPost(){
-            SelectListAccess = new SelectList(groupService.GetAllAccess(), "AccessID", "Access");
             if (!ModelState.IsValid)
             {
+                SelectListAccess = new SelectList(groupService.GetAllAccess(), "AccessID", "AccessName");
                 return Page();
             }
             else
             {
                 Group.CreatedAt = DateTime.Now;
                 Group.CreatedBy = 1;
-                Group.Access = (Access)SelectListAccess.SelectedValue;
                 groupService.AddGroup(Group);
             }
             return RedirectToPage("GetGroup");
