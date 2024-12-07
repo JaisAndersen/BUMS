@@ -15,8 +15,10 @@ namespace BUMS{
             this.service = service;
         }
         public IEnumerable<User> Users { get; set; } = new List<User>();
-        public void OnGet()
+        public int UID { get; set; }
+        public void OnGet(int uid)
         {
+            UID = uid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
                 Users = service.GetUser(FilterCriteria);

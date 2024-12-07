@@ -11,8 +11,8 @@ namespace BUMS.Models
         public int GroupID { get; set; }
         public Group Group { get; set; }
 
-        public int AccessID { get; set; }
-        public Access Access { get; set; }
+      //  public int AccessID { get; set; }
+      //  public Access Access { get; set; }
         
        
 
