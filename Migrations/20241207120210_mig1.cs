@@ -69,17 +69,23 @@ namespace BUMS.Migrations
                     UserGroupID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: false)
+                    GroupID = table.Column<int>(type: "int", nullable: true),
+                    AccessID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserGroups", x => x.UserGroupID);
                     table.ForeignKey(
-                        name: "FK_UserGroups_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "GroupId",
+                        name: "FK_UserGroups_Accesss_AccessID",
+                        column: x => x.AccessID,
+                        principalTable: "Accesss",
+                        principalColumn: "AccessID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserGroups_Groups_GroupID",
+                        column: x => x.GroupID,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId");
                     table.ForeignKey(
                         name: "FK_UserGroups_Users_UserID",
                         column: x => x.UserID,
@@ -94,9 +100,14 @@ namespace BUMS.Migrations
                 column: "AccessID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGroups_GroupId",
+                name: "IX_UserGroups_AccessID",
                 table: "UserGroups",
-                column: "GroupId");
+                column: "AccessID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserGroups_GroupID",
+                table: "UserGroups",
+                column: "GroupID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserGroups_UserID",

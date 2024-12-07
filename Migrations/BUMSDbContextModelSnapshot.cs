@@ -106,7 +106,10 @@ namespace BUMS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserGroupID"));
 
-                    b.Property<int>("GroupId")
+                    b.Property<int>("AccessID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GroupID")
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
@@ -114,7 +117,9 @@ namespace BUMS.Migrations
 
                     b.HasKey("UserGroupID");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("AccessID");
+
+                    b.HasIndex("GroupID");
 
                     b.HasIndex("UserID");
 
@@ -124,7 +129,7 @@ namespace BUMS.Migrations
             modelBuilder.Entity("BUMS.Models.Group", b =>
                 {
                     b.HasOne("BUMS.Models.Access", "Access")
-                        .WithMany("Groups")
+                        .WithMany()
                         .HasForeignKey("AccessID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -134,26 +139,32 @@ namespace BUMS.Migrations
 
             modelBuilder.Entity("BUMS.Models.UserGroup", b =>
                 {
-                    b.HasOne("BUMS.Models.Group", "Group")
+                    b.HasOne("BUMS.Models.Access", "Access")
                         .WithMany()
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("AccessID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BUMS.Models.User", "User")
+                    b.HasOne("BUMS.Models.Group", "Group")
                         .WithMany()
+                        .HasForeignKey("GroupID");
+
+                    b.HasOne("BUMS.Models.User", "User")
+                        .WithMany("UserGroup")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Access");
 
                     b.Navigation("Group");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BUMS.Models.Access", b =>
+            modelBuilder.Entity("BUMS.Models.User", b =>
                 {
-                    b.Navigation("Groups");
+                    b.Navigation("UserGroup");
                 });
 #pragma warning restore 612, 618
         }

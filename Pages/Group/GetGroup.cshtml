@@ -1,7 +1,7 @@
 ﻿@page
 @model BUMS.GetGroupModel
 @{
-    ViewData["Title"] = "Groups";
+ViewData["Title"] = "Groups";
 }
 
 <h3>List of Groups</h3>
@@ -22,33 +22,34 @@
             <th>Name</th>
             <th>Created At</th>
             <th>Created By</th>
-            <th>Access Type</th>     
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @if (Model != null)
         {
-            @foreach (var item in Model.Groups)
-            {
-                <tr>
-                    <td>@item.GroupId</td>
-                    <td>@item.GroupName</td>
-                    <td>@item.CreatedAt</td>
-                    <td>@item.CreatedBy</td>
-                    <td>@item.Access</td>
-                    <td>
-                        <p>
-                            <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
-                        </p>
-                    </td>
-                </tr>
-            }
+        @foreach (var item in Model.Groups)
+        {
+        <tr>
+            <td>@item.GroupId</td>
+            <td>@item.GroupName</td>
+            <td>@item.CreatedAt</td>
+            <td>@item.CreatedBy</td>
+            <td></td>
+            <td>
+                <p>
+                    <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
+                </p>
+            </td>
+        </tr>
+        }
         }
 </table>
 

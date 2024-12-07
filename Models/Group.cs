@@ -24,9 +24,10 @@ namespace BUMS.Models
         //[EnumDataType(typeof(AccessType))]
         //public AccessType AccessType {get;set;}
 
-        public Access Access {get;set;}
+        [Display(Name = "Access")]
+        public Access? Access {get;set;}
+        [Display(Name = "AccessID")]
         public int AccessID { get; set; }
-
 
         //public ICollection<UserGroup> UserGroups { get; set; }
     }
