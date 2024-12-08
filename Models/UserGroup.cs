@@ -8,13 +8,13 @@ namespace BUMS.Models
         public int UserGroupID { get; set; }
         public int UserID { get; set; }
         public User User { get; set; }
-        public int GroupID { get; set; }
+        public int? GroupID { get; set; }
         public Group Group { get; set; }
 
-      //  public int AccessID { get; set; }
-      //  public Access Access { get; set; }
-        
-       
+        //public int AccessID { get; set; }
+        public Access Access { get; set; }
+
+
 
         //[ForeignKey(nameof(AccessID))]
         //[InverseProperty(nameof(Access.AccessUserGroups))]

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create Group";
 }
 
-<h1>Create</h1>
+<h1>Create Group</h1>
 
 <div class="row">
     <div class="col-md-4">
@@ -15,13 +15,13 @@
                 <label asp-for="@Model.Group.GroupName" class="control-label"></label>
                 <input asp-for="@Model.Group.GroupName" class="form-control" />
                 <span asp-validation-for="@Model.Group.GroupName" class="text-danger"></span>
-            </div>            
+            </div>
             <div class="form-group">
-                <label asp-for="@Model.Group.AccessType" class="control-label"></label>
-                <select asp-for="@Model.Group.AccessType" asp-items="@Html.GetEnumSelectList<AccessType>()">
-                    <option selected="selected" value=""></option>
+                <label asp-for="@Model.Group.Access" class="control-label"></label>
+                <select class="form-select" asp-for="@Model.Group.Access" id="AccessID" asp-items="@Model.SelectListAccess">
+                    <option selected="selected" value="">---Choose access type for the group---</option>
                 </select>
-                <span asp-validation-for="@Model.Group.AccessType" class="text-danger"></span>
+                <span asp-validation-for="@Model.Group.Access" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -47,5 +47,9 @@ namespace BUMS.Services
                 }
             }
         }
+        public List<Access> GetAllAccess()
+        {
+            return context.Accesss.ToList();
+        }
     }
 }

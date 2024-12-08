@@ -5,10 +5,10 @@ namespace BUMS.Models
 {
         public class Access
     {
-        [Display(Name = "Access id")]
+        [Display(Name = "AccessID")]
         public int AccessID { get; set; }
         [Required]
-        [Display(Name = "Access name")]
+        [Display(Name = "AccessName")]
         [MaxLength(50), MinLength(0)]
         public string AccessName { get; set; }
         [Required]
@@ -16,6 +16,6 @@ namespace BUMS.Models
         [MaxLength(50), MinLength(0)]
         public string SystemName { get; set; }
         //public ICollection<UserGroup> UserGroups { get; set; }
-        public ICollection<Group> Groups { get; set; }
+        //public ICollection<Group> Groups { get; set; }
     }
 }
