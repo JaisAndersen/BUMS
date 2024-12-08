@@ -1,6 +1,4 @@
-﻿using BUMS.Models;
-
-namespace BUMS.Services.Interfaces
+﻿namespace BUMS.Services.Interfaces
 {
     public interface IUserGroupService
     {

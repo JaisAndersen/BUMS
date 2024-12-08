@@ -1,7 +1,7 @@
 ﻿@page
 @model BUMS.GetGroupModel
 @{
-ViewData["Title"] = "Groups";
+    ViewData["Title"] = "Groups";
 }
 
 <h3>List of Groups</h3>
@@ -30,14 +30,25 @@ ViewData["Title"] = "Groups";
     <tbody>
         @if (Model != null)
         {
-        @foreach (var item in Model.Groups)
-        {
-        <tr>
-            <td>@item.GroupId</td>
-            <td>@item.GroupName</td>
-            <td>@item.CreatedAt</td>
-            <td>@item.CreatedBy</td>
-            <td></td>
+            @foreach (var item in Model.Groups)
+            {
+                <tr>
+                    <td>@item.GroupId</td>
+                    <td>@item.GroupName</td>
+                    <td>@item.CreatedAt</td>
+                    <td>@item.CreatedBy</td>
+                    <td>
+                        <p>
+                            @{
+                                var routeValues = new Dictionary<string, string>();
+                                routeValues.Add("gid", item.GroupId.ToString());
+                                routeValues.Add("uid", Model.UId.ToString());
+                            }
+                            @if(Model.UId != 0){
+                                <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add user to this group</a>
+                            }
+                </p>
+            </td>
             <td>
                 <p>
                     <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>

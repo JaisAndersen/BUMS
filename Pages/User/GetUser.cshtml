@@ -40,19 +40,10 @@
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
                     <td>
-                        @{
-                            var routeValues = new Dictionary<string, string>();
-                            routeValues.Add("uid", item.UserID.ToString());
-                        }
-                        @if (Model.UID != 0)
-                        {
-                            <p>
-                                <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add to usergroup</a>
-                            </p>
-                        }
+                        
                     </td>
                     <td>
-                            <a asp-page="/User/ShowUserGroup" asp-route-sid="@item.UserID"> UserGroups </a>
+                            <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.UserID"> See groups </a>
                     </td>
                     <td>
                         <p>

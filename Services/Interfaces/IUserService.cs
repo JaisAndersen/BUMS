@@ -1,6 +1,3 @@
-using BUMS.Models;
-using System;
-
 namespace BUMS
 {
     public interface IUserService

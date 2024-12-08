@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BUMS.Models;
 using BUMS.Services.Interfaces;
 
-namespace BUMS.Pages.Group
+namespace BUMS
 {
     public class UpdateGroupModel : PageModel
     {
         [BindProperty]
-        public Models.Group Group { get; set; }
+        public Group Group { get; set; }
         private IGroupService service;
 
         public UpdateGroupModel(IGroupService service)

@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BUMS.Models
+namespace BUMS
 {
     public class Group
     {
@@ -10,25 +12,19 @@ namespace BUMS.Models
 
         [Required]
         [Display(Name = "Group name")]
-        [MaxLength(50), MinLength(0)]
+        [StringLength(50)]
         public string GroupName { get; set; }
 
-        [Display(Name = "Created at")]
         public DateTime CreatedAt { get; set; }
 
-        [Display(Name = "Created by")]
         public int CreatedBy { get; set; }
-
-
-        //[Display(Name = "AccessType")]
-        //[EnumDataType(typeof(AccessType))]
-        //public AccessType AccessType {get;set;}
 
         [Display(Name = "Access")]
         public Access? Access {get;set;}
         [Display(Name = "AccessID")]
         public int AccessID { get; set; }
 
-        //public ICollection<UserGroup> UserGroups { get; set; }
+        [ValidateNever]
+        public virtual ICollection<UserGroup> UserGroups { get; set; }
     }
 }
