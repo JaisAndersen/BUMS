@@ -15,10 +15,11 @@ namespace BUMS{
         public GetUserModel(IUserService service){
             this.service = service;
         }
+        public int GId { get; set; }
 
-        public int GroupID { get; set; }
-        public void OnGet()
+        public void OnGet(int gid)
         {
+            GId = gid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
                 Users = service.GetUser(FilterCriteria);

@@ -26,6 +26,7 @@
             <th></th>
             <th></th>
             <th></th>    
+           
         </tr>
     </thead>
     <tbody>
@@ -40,15 +41,12 @@
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
                     <td>
-                        
-                    </td>
-                    <td>
                         @{
                         var routeValues = new Dictionary<string, string>();
-                            routeValues.Add("GID", Model.GroupID.ToString());
-                        routeValues.Add("UID", item.UserID.ToString());
+                            routeValues.Add("gid", Model.GId.ToString());
+                        routeValues.Add("uid", item.UserID.ToString());
                     }
-                    @if (Model.GroupID != 0)
+                    @if (Model.GId != 0)
                     {
                         <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add this user to the group</a>
                     }

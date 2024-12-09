@@ -15,15 +15,15 @@ namespace BUMS{
 
         public Group Group { get; set; }
 
-        public int UId { get; set; }
+        public int GId { get; set; }
 
         public GetGroupModel(IGroupService service)
         {
             context = service;
         }
-        public void OnGet(int uid)
+        public void OnGet(int gid)
         {
-            UId = uid;
+            GId = gid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
                 Groups = context.FilterGroupByName(FilterCriteria);
