@@ -1,10 +1,5 @@
-﻿using BUMS.Models;
-using BUMS.Services.Interfaces;
+﻿using BUMS.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BUMS.Services
 {

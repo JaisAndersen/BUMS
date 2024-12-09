@@ -1,30 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BUMS.Models;
 using BUMS.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BUMS
 {
     public class CreateUserGroupModel : PageModel
     {
-        
-        IUserGroupService service;
-        public CreateUserGroupModel(IUserGroupService service)
-        {
-            this.service = service;
-        }
-        public void OnGet(int uid)
-        {
-           UserGroup.UserID = uid;
-            
-        }
+        private IUserGroupService service;
+        private IUserService userService;
+        private IGroupService groupService;
+
+        public Group Group { get; set; }
+        public User User { get; set; }
+
         [BindProperty]
         public UserGroup UserGroup { get; set; } = new UserGroup();
+
+        public CreateUserGroupModel(IUserGroupService service, 
+            IUserService userService, 
+            IGroupService groupService)
+        {
+            this.userService = userService;
+            this.groupService = groupService;
+            this.service = service;
+        }
+        public void OnGet(int uid, int gid)
+        {
+            UserGroup.GroupID = gid;
+            UserGroup.UserID = uid;
+            Group = groupService.GetGroupById(gid);
+            User = userService.GetUserById(uid);
+            UserGroup = new UserGroup() { GroupID = gid, UserID = uid };
+        }
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)

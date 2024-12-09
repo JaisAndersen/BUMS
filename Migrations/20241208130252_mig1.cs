@@ -31,7 +31,7 @@ namespace BUMS.Migrations
                 {
                     UserID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false)
                 },
@@ -69,23 +69,17 @@ namespace BUMS.Migrations
                     UserGroupID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: true),
-                    AccessID = table.Column<int>(type: "int", nullable: false)
+                    GroupID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserGroups", x => x.UserGroupID);
                     table.ForeignKey(
-                        name: "FK_UserGroups_Accesss_AccessID",
-                        column: x => x.AccessID,
-                        principalTable: "Accesss",
-                        principalColumn: "AccessID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_UserGroups_Groups_GroupID",
                         column: x => x.GroupID,
                         principalTable: "Groups",
-                        principalColumn: "GroupId");
+                        principalColumn: "GroupId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserGroups_Users_UserID",
                         column: x => x.UserID,
@@ -97,11 +91,6 @@ namespace BUMS.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_AccessID",
                 table: "Groups",
-                column: "AccessID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserGroups_AccessID",
-                table: "UserGroups",
                 column: "AccessID");
 
             migrationBuilder.CreateIndex(

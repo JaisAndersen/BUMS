@@ -1,12 +1,7 @@
-using BUMS.Pages;
-using BUMS.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BUMS{
+namespace BUMS
+{
     public class UserService : IUserService{
         BUMSDbContext context;
         public UserService(BUMSDbContext service){
@@ -19,7 +14,11 @@ namespace BUMS{
         }
         public User GetUserById(int ID)
         {
-            return context.Users.Find(ID);
+            User? user = context.Users
+                .Include(u => u.UserGroup).ThenInclude(g => g.Group)
+                .AsNoTracking()
+                .FirstOrDefault(m => m.UserID == ID);
+            return user;
         }
         public void DeleteUser(User user)
         {
@@ -31,7 +30,6 @@ namespace BUMS{
         }
         public IEnumerable<User> GetUser(string filter)
         {
-            
             return this.context.Set<User>().Where(s => s.UserName.Contains(filter)).AsNoTracking().ToList();
         }
         public IEnumerable<User> GetUser()
