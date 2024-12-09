@@ -37,20 +37,9 @@
                     <td>@item.GroupName</td>
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
-                    
-                      
-                    <td>
-                        
-                            @{
-                                var routeValues = new Dictionary<string, string>();
-                                routeValues.Add("gid", item.GroupId.ToString());
-                                
-                            }
-                            @if(Model.GId != 0){
-                                <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add user to this group</a>
-                            }
-                
-            </td>
+                        <td>
+                            <a asp-page="/User/GetUser" asp-route-gid="@item.GroupId"> Add a user to this group </a>
+                    </td>
                     <td>
                     <p>
                         <a asp-page="/User/GetUser" asp-route-id="@item.GroupId">Add a user to group</a>
