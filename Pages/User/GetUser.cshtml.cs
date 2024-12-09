@@ -15,6 +15,8 @@ namespace BUMS{
         public GetUserModel(IUserService service){
             this.service = service;
         }
+
+        public int GroupID { get; set; }
         public void OnGet()
         {
             if (!String.IsNullOrEmpty(FilterCriteria))

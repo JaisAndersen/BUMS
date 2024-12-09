@@ -9,6 +9,8 @@ namespace BUMS{
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
 
+        
+
         public IEnumerable<Group> Groups { get; set; }
 
         public Group Group { get; set; }
