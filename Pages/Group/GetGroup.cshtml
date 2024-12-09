@@ -37,9 +37,6 @@
                     <td>@item.GroupName</td>
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
-                        <td>
-                            <a asp-page="/User/GetUser" asp-route-gid="@item.GroupId"> Add a user to this group </a>
-                    </td>
                     <td>
                     <p>
                         <a asp-page="/User/GetUser" asp-route-id="@item.GroupId">Add a user to group</a>
