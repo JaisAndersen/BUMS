@@ -34,10 +34,10 @@ namespace BUMS
         }
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
             service.AddUserGroup(UserGroup);
 
             return RedirectToPage("GetUserGroup");
