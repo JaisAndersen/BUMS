@@ -10,11 +10,14 @@ namespace BUMS
         private IUserService userService;
         private IGroupService groupService;
 
+        public string errorMessage = "";
         public Group Group { get; set; }
         public User User { get; set; }
 
         [BindProperty]
         public UserGroup UserGroup { get; set; } = new UserGroup();
+
+        public int UId { get; set; }
 
         public CreateUserGroupModel(IUserGroupService service, 
             IUserService userService, 
@@ -26,6 +29,7 @@ namespace BUMS
         }
         public void OnGet(int uid, int gid)
         {
+            UId = uid;
             UserGroup.GroupID = gid;
             UserGroup.UserID = uid;
             Group = groupService.GetGroupById(gid);
@@ -38,7 +42,14 @@ namespace BUMS
             //{
             //    return Page();
             //}
-            service.AddUserGroup(UserGroup);
+            if (userService.GetUserById(UId) == null)
+            {
+                service.AddUserGroup(UserGroup);
+            }
+            else
+            {
+                errorMessage = "Bruger findes i gruppen allerede";
+            }
 
             return RedirectToPage("GetUserGroup");
         }
