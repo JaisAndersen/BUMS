@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BUMS.Migrations
 {
     /// <inheritdoc />
-    public partial class migr1 : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,7 @@ namespace BUMS.Migrations
                 {
                     UserID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false)
                 },
@@ -49,14 +49,14 @@ namespace BUMS.Migrations
                     GroupName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    AccessId = table.Column<int>(type: "int", nullable: false)
+                    AccessID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Groups", x => x.GroupId);
                     table.ForeignKey(
-                        name: "FK_Groups_Accesss_AccessId",
-                        column: x => x.AccessId,
+                        name: "FK_Groups_Accesss_AccessID",
+                        column: x => x.AccessID,
                         principalTable: "Accesss",
                         principalColumn: "AccessID",
                         onDelete: ReferentialAction.Cascade);
@@ -89,9 +89,9 @@ namespace BUMS.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Groups_AccessId",
+                name: "IX_Groups_AccessID",
                 table: "Groups",
-                column: "AccessId");
+                column: "AccessID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserGroups_GroupID",

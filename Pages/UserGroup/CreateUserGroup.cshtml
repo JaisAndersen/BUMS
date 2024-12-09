@@ -1,0 +1,55 @@
+﻿@page
+@model BUMS.CreateUserGroupModel
+@{
+    ViewData["Title"] = "CreateUserGroup";
+}
+
+<h1>Add a user to a group</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="  ModelOnly  " class="text-danger">
+            </div>
+            <p></p>
+            <h5>User</h5>
+            <div class="form-group">
+                <label asp-for="@Model.User.UserID" class="control-label"></label>
+                <input asp-for="@Model.User.UserID" class="form-control" />
+                <span asp-validation-for="@Model.User.UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.User.UserName" class="control-label"></label>
+                <input asp-for="@Model.User.UserName" class="form-control" />
+                <span asp-validation-for="@Model.User.UserName" class="text-danger"></span>
+            </div>
+            <p></p>
+            <h5>Group</h5>
+            <div class="form-group">
+                <label asp-for="@Model.Group.GroupId" class="control-label"></label>
+                <input asp-for="@Model.Group.GroupId" class="form-control" />
+                <span asp-validation-for="@Model.Group.GroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Group.GroupName" class="control-label"></label>
+                <input asp-for="@Model.Group.GroupName" class="form-control" />
+                <span asp-validation-for="@Model.Group.GroupName" class="text-danger"></span>
+            </div>
+            <p></p>
+            <h5>UserGroup</h5>
+            <div class="form-group">
+                <label asp-for="@Model.UserGroup.UserID" class="control-label"></label>
+                <input asp-for="@Model.UserGroup.UserID" class="form-control" />
+                <span asp-validation-for="@Model.UserGroup.UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.UserGroup.GroupID" class="control-label"></label>
+                <input asp-for="@Model.UserGroup.GroupID" class="form-control" />
+                <span asp-validation-for="@Model.UserGroup.GroupID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BUMS.Models;
 using BUMS.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlTypes;
 
 namespace BUMS
 {
@@ -9,24 +10,31 @@ namespace BUMS
     {
         [BindProperty]
         public Group Group { get; set; }
-        IGroupService groupService;
-        public CreateGroupModel(IGroupService service)
+        private IGroupService service;
+        private BUMSDbContext context;
+
+        public SelectList SelectListAccess {get;set;}
+
+        public CreateGroupModel(IGroupService service, BUMSDbContext context)
         {
-            this.groupService = service;
+            this.context = context;
+            this.service = service;
+            
+            SelectListAccess = new SelectList(context.Accesss, "AccessID","AccessName",selectedValue: typeof(Access));
         }        
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            return Page();
         }
-        public IActionResult OnPost(){
-            if (!ModelState.IsValid){
+        public IActionResult OnPost(Group group){
+            if (!ModelState.IsValid)
+            {
                 return Page();
             }
-            else{
-
-                Group.CreatedAt = DateTime.Now;
-                Group.CreatedBy = 1;
-                groupService.AddGroup(Group);
-            }
+            group.CreatedAt = DateTime.Now;
+            group.CreatedBy = 1;
+            group.AccessID = 1;
+            service.AddGroup(group);
             return RedirectToPage("GetGroup");
         }
 

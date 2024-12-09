@@ -1,5 +1,5 @@
-﻿using BUMS.Models;
-using BUMS.Services.Interfaces;
+﻿using BUMS.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BUMS.Services
 {
@@ -33,7 +33,11 @@ namespace BUMS.Services
         }   
         public Group GetGroupById(int ID)
         {
-            return context.Groups.Find(ID);
+            Group? group = context.Groups
+                .Include(s => s.UserGroups).ThenInclude(n=>n.User)
+                .AsNoTracking()
+                .FirstOrDefault(m=>m.GroupId == ID);
+            return group;
         }
         public void UpdateGroup(Group group, string GroupName)
         {
@@ -46,6 +50,10 @@ namespace BUMS.Services
                     context.SaveChanges();
                 }
             }
+        }
+        public List<Access> GetAllAccess()
+        {
+            return context.Accesss.ToList();
         }
     }
 }

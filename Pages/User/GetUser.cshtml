@@ -24,6 +24,8 @@
             <th>Created By</th>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>    
         </tr>
     </thead>
     <tbody>
@@ -37,7 +39,12 @@
                     <td>@item.UserName</td>
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
-                   @* <td>  @item.UserGroups </td> Denne skal vise gruppen useren er i *@
+                    <td>
+                        
+                    </td>
+                    <td>
+                            <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.UserID"> See groups </a>
+                    </td>
                     <td>
                         <p>
                             <a asp-page="/User/UpdateUser" asp-route-id="@item.UserID">Update</a>

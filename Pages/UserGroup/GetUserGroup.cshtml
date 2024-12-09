@@ -1,0 +1,27 @@
+﻿@page
+@model BUMS.GetUserGroupModel
+@{
+}
+<h3 style="color:black">UserGroups</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>UserGroup Id</th>
+            <th>User</th>
+            <th>Group</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.UserGroups!= null)
+        {
+          @foreach (var item in Model.UserGroups)
+          {
+        <tr>
+            <td>@item.UserGroupID </td>
+            <td>@item.UserID</td>
+            <td>@item.GroupID</td>
+        </tr>
+            }
+        }
+</table>

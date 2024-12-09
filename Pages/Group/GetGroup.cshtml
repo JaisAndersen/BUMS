@@ -22,7 +22,8 @@
             <th>Name</th>
             <th>Created At</th>
             <th>Created By</th>
-            <th></th>     
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -38,16 +39,28 @@
                     <td>@item.CreatedBy</td>
                     <td>
                         <p>
-                            <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
-                        </p>
-                    </td>
-                </tr>
-            }
+                            @{
+                                var routeValues = new Dictionary<string, string>();
+                                routeValues.Add("gid", item.GroupId.ToString());
+                                routeValues.Add("uid", Model.UId.ToString());
+                            }
+                            @if(Model.UId != 0){
+                                <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add user to this group</a>
+                            }
+                </p>
+            </td>
+            <td>
+                <p>
+                    <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
+                </p>
+            </td>
+        </tr>
+        }
         }
 </table>
 

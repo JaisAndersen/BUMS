@@ -1,19 +1,11 @@
-using BUMS.Pages;
-using BUMS.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BUMS{
-    public class UserService : IUserService
-    {
-
+namespace BUMS
+{
+    public class UserService : IUserService{
         BUMSDbContext context;
-        public UserService(BUMSDbContext Service)
-        {
-            context = Service;
+        public UserService(BUMSDbContext service){
+            context = service;
         }
         public void AddUser(User user)
         {
@@ -21,26 +13,13 @@ namespace BUMS{
             context.SaveChangesAsync();
         }
         public User GetUserById(int ID)
-        {            
-            return context.Users.Find(ID);
-        }
-
-       
-
-        public void UpdateUser(User user, string UserName)
         {
-            using (var context = new BUMSDbContext())
-            {
-                var entity = context.Users.FirstOrDefault(item => item.UserID == user.UserID);
-                if (entity != null)
-                {
-                    entity.UserName = UserName;
-                    context.SaveChanges();
-                }
-            }
+            User? user = context.Users
+                .Include(u => u.UserGroup).ThenInclude(g => g.Group)
+                .AsNoTracking()
+                .FirstOrDefault(m => m.UserID == ID);
+            return user;
         }
-
-
         public void DeleteUser(User user)
         {
             if (user != null)
@@ -51,13 +30,17 @@ namespace BUMS{
         }
         public IEnumerable<User> GetUser(string filter)
         {
-            
             return this.context.Set<User>().Where(s => s.UserName.Contains(filter)).AsNoTracking().ToList();
         }
         public IEnumerable<User> GetUser()
         {
-          
+            
             return context.Users;
+        }
+
+        public void UpdateUser(User user, string UserName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

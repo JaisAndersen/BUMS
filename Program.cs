@@ -1,4 +1,3 @@
-using BUMS.Models;
 using BUMS.Services.Interfaces;
 using BUMS.Services;
 
@@ -15,7 +14,7 @@ namespace BUMS
             builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddDbContext<BUMSDbContext>();
             builder.Services.AddTransient<IUserService, UserService>();
-            
+            builder.Services.AddTransient<IUserGroupService, UserGroupService>();
 
             var app = builder.Build();
 
