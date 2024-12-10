@@ -40,7 +40,16 @@ namespace BUMS
 
         public void UpdateUser(User user, string UserName)
         {
-            throw new NotImplementedException();
+                using (context)
+                {
+                    var entity = context.Users.FirstOrDefault(item => item.UserID == user.UserID);
+                    if (entity != null)
+                    {
+                        entity.UserName = UserName;
+                        context.SaveChanges();
+                    }
+                }
+            }
         }
     }
-}
+
