@@ -1,5 +1,3 @@
-using BUMS.Services.Interfaces;
-using BUMS.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BUMS
@@ -13,8 +11,8 @@ namespace BUMS
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddDbContext<BUMSDbContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddTransient<IUserGroupService, UserGroupService>();
             

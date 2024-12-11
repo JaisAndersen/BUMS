@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BUMS.Services.Interfaces;
-using System;
-
 
 namespace BUMS
 {
