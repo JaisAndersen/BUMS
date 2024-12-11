@@ -1,7 +1,6 @@
-﻿using BUMS.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BUMS.Services
+namespace BUMS
 {
     public class GroupService : IGroupService
     {

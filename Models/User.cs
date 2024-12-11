@@ -13,6 +13,7 @@ namespace BUMS
         [StringLength(50)]
         public string UserName { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
 
         public int CreatedBy { get; set; }

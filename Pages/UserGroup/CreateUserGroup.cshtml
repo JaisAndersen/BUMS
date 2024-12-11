@@ -1,7 +1,9 @@
 ﻿@page
 @model BUMS.CreateUserGroupModel
+@using BUMS
+@inject IUserGroupService service
 @{
-    ViewData["Title"] = "CreateUserGroup";
+    ViewData["Title"] = "Create new UserGroup";
 }
 
 <h1>Add user: "@Model.User.UserName" to group: "@Model.Group.GroupName"</h1>
@@ -12,7 +14,7 @@
             @if(Model.errorMessage.Length > 0)
             {
                 <div>
-                    <label class="text-danger">Bruger findes allerede i gruppes</label>
+                    <label class="text-danger">Bruger findes allerede i gruppen</label>
                 </div>
             }
             <div asp-validation-summary="  ModelOnly  " class="text-danger">
