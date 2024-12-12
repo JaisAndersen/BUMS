@@ -42,7 +42,7 @@ namespace BUMS
             //{
             //    return Page();
             //}
-            if (userService.GetUserById(UId) == null)
+            if (service.GetUserById(UId, User) != User)
             {
                 service.AddUserGroup(UserGroup);
             }

@@ -53,7 +53,12 @@ namespace BUMS.Services
         }
         public List<Access> GetAllAccess()
         {
-            return context.Accesss.ToList();
+            return context.Access.ToList();
+        }
+        public User GetUserById(int ID)
+        {
+            //return context.Groups.FirstOrDefault(u => u.UserGroups.FirstOrDefault(c=>c.UserID == ID));
+            throw new NotImplementedException();
         }
     }
 }

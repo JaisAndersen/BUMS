@@ -5,7 +5,6 @@ namespace BUMS.Services
 {
     public class UserGroupService : IUserGroupService
     {
-
         BUMSDbContext context;
         public UserGroupService(BUMSDbContext service)
         {
@@ -20,8 +19,10 @@ namespace BUMS.Services
             context.UserGroups.Add(UserGroup);
             context.SaveChanges();
         }
-
-
-
+        public User GetUserById(int id, User user)
+        {
+            context.UserGroups.Find(user, id);
+            return user;
+        }
     }
 }

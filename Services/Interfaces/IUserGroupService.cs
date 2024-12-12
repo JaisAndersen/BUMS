@@ -5,6 +5,6 @@
 
         public IEnumerable<UserGroup> GetUserGroups();
         public void AddUserGroup(UserGroup UserGroup);
-
+        public User GetUserById(int id, User user);
     }
 }
