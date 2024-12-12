@@ -36,7 +36,7 @@
             @foreach (var item in Model.Users)
             {
                 <tr>
-                    <td>@item.UserID</td>
+                    <td>@item.UserNavigationID</td>
                     <td>@item.UserName</td>
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
@@ -44,26 +44,28 @@
                     @{
                         var routeValues = new Dictionary<string, string>();
                             routeValues.Add("gid", Model.GId.ToString());
-                        routeValues.Add("uid", item.UserID.ToString());
+                        routeValues.Add("uid", item.UserNavigationID.ToString());
                     }
                     @if (Model.GId != 0)
                     {
                         <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add this user to the group</a>
                     }
                     </td>
+                    @if(Model.GId == 0){
                     <td>
-                            <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.UserID"> See groups </a>
+                            <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.UserNavigationID"> See groups </a>
                     </td>
                     <td>
                         <p>
-                            <a asp-page="/User/UpdateUser" asp-route-id="@item.UserID">Update</a>
+                            <a asp-page="/User/UpdateUser" asp-route-id="@item.UserNavigationID">Update</a>
                         </p>
                     </td>
                     <td>
                         <p>
-                            <a asp-page="/User/DeleteUser" asp-route-id="@item.UserID">Delete</a>
+                            <a asp-page="/User/DeleteUser" asp-route-id="@item.UserNavigationID">Delete</a>
                         </p>
                     </td>
+                    }
                 </tr>
             }
         }

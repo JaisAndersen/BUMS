@@ -7,7 +7,7 @@ namespace BUMS
     public class CreateGroupModel : PageModel
     {
         [BindProperty]
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
         private IGroupService service;
         private BUMSDbContext context;
 

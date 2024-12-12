@@ -19,9 +19,9 @@
           @foreach (var item in Model.UserGroups)
           {
         <tr>
-            <td>@item.UserGroupID </td>
-            <td>@item.UserID</td>
-            <td>@item.GroupID</td>
+            <td>@item?.UserGroupID </td>
+            <td>@item?.User?.UserNavigationID</td>
+            <td>@item?.Group?.GroupID</td>
         </tr>
             }
         }

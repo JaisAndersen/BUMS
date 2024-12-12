@@ -1,3 +1,3 @@
-﻿INSERT INTO Accesss VALUES ('Admin','BUMS'); 
-INSERT INTO Accesss VALUES ('User Admin','Grimbergen'); 
-INSERT INTO Accesss VALUES ('User','Grimbergen'); 
+﻿INSERT INTO Access VALUES ('Admin','BUMS'); 
+INSERT INTO Access VALUES ('User Admin','Grimbergen'); 
+INSERT INTO Access VALUES ('User','Grimbergen'); 

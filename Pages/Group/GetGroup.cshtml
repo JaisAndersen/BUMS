@@ -39,9 +39,6 @@ ViewData["Title"] = "Groups";
             <td>@item.CreatedAt</td>
             <td>@item.CreatedBy</td>
             <td>
-                @if(Model.UId != 0)
-                {
-                }
             </td>
             <td>
                 <p>
@@ -49,16 +46,17 @@ ViewData["Title"] = "Groups";
                     {
                     <a asp-page="/User/GetUser" asp-route-gid="@item.GroupID">Add a user to this group</a>
                     }
-                    else
+                    else if(Model.UId > 0)
                     {
                     Dictionary<string,string> routeValues = new Dictionary<string, string>();
                         routeValues.Add("uid",Model.UId.ToString());
                         routeValues.Add("gid", item.GroupID.ToString());
                         <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add user to this group</a>
 
-                        }
+                    }
                 </p>
             </td>
+            @if(Model.UId == 0){
             <td>
                 <p>
                     <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupID">Update</a>
@@ -69,6 +67,7 @@ ViewData["Title"] = "Groups";
                     <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupID">Delete </a>
                 </p>
             </td>
+            }
         </tr>
         }
         }

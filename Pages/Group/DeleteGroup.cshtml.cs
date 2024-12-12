@@ -6,7 +6,7 @@ namespace BUMS
     public class DeleteGroupModel : PageModel
     {
         [BindProperty]
-        public Group group { get; set; }
+        public Group? group { get; set; }
 
         IGroupService service;
 

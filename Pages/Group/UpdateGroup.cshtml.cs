@@ -6,7 +6,7 @@ namespace BUMS
     public class UpdateGroupModel : PageModel
     {
         [BindProperty]
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
         private IGroupService service;
 
         public UpdateGroupModel(IGroupService service)

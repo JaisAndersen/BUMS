@@ -6,19 +6,15 @@
 <h1>Edit User</h1>
 <form method="post">
     <div class="form-group">
-        <label asp-for="@Model.user.UserID" class="control-label">User ID</label>
-        <input asp-for="@Model.user.UserID" class="form-control" readonly />
-        <span asp-validation-for="@Model.user.UserID" class="text-danger"></span>
+        <label asp-for="@Model.user.UserNavigationID" class="control-label">User ID</label>
+        <input asp-for="@Model.user.UserNavigationID" class="form-control" readonly />
+        <span asp-validation-for="@Model.user.UserNavigationID" class="text-danger"></span>
     </div>
-
-  @*  <div>
-        <label asp-for="@Model.user.UserName" class="control-label">Varekategori</label>
-        <select asp-for="@Model.user.UserName" asp-items="@Html.GetEnumSelectList<UserGroup>()">
-            <option selected="selected" value="">Vælg et kategori</option>
-        </select>
-        <span asp-validation-for="@Model.item.StorageType" class="text-danger"></span>
-    </div> *@
-
+    <div class="form-group">
+        <label asp-for="@Model.user.Email" class="control-label">Username</label>
+        <input asp-for="@Model.user.Email" class="form-control" readonly/>
+        <span asp-validation-for="@Model.user.Email" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="@Model.user.UserName" class="control-label">Username</label>
         <input asp-for="@Model.user.UserName" class="form-control" />
