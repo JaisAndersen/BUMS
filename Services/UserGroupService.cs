@@ -19,7 +19,7 @@ namespace BUMS
             context.SaveChanges();
         }
         public bool IsUserInGroup(User user, Group group, UserGroup? userGroup){
-            UserGroup checkUG = new UserGroup() { UserID = user.UserID, GroupID = group.GroupId, User = user };
+            UserGroup? checkUG = new UserGroup() { UserID = user.UserID, GroupID = group.GroupId, User = user };
 
             List<UserGroup> userGroups = GetUserGroups().ToList();
 
