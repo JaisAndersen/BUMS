@@ -1,10 +1,9 @@
-﻿namespace BUMS.Services.Interfaces
+﻿namespace BUMS
 {
     public interface IUserGroupService
     {
-
         public IEnumerable<UserGroup> GetUserGroups();
         public void AddUserGroup(UserGroup UserGroup);
-        public User GetUserById(int id, User user);
+        public bool IsUserInGroup(User user, Group group, UserGroup userGroup);
     }
 }

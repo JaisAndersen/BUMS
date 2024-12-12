@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BUMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data.SqlTypes;
 
 namespace BUMS
 {

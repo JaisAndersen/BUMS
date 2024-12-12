@@ -4,9 +4,10 @@ namespace BUMS
 {
     public class BUMSDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        public BUMSDbContext(DbContextOptions<BUMSDbContext> options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            options.UseSqlServer(@"Data Source=mssql5.unoeuro.com;Initial Catalog=jaand_dk_db_bums;User ID=jaand_dk;Password=kbm3ydDrAF9cap4n2E6H;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }

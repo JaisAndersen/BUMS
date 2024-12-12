@@ -1,10 +1,12 @@
 ﻿@page
 @model BUMS.CreateUserGroupModel
+@using BUMS
+@inject IUserGroupService service
 @{
-    ViewData["Title"] = "CreateUserGroup";
+    ViewData["Title"] = "Create new UserGroup";
 }
 
-<h1>Add a user to a group</h1>
+<h1>Add user: "@Model.User.UserName" to group: "@Model.Group.GroupName"</h1>
 
 <div class="row">
     <div class="col-md-4">
@@ -12,7 +14,7 @@
             @if(Model.errorMessage.Length > 0)
             {
                 <div>
-                    <label class="text-danger">Bruger findes allerede i gruppes</label>
+                    <label class="text-danger">Bruger findes allerede i gruppen</label>
                 </div>
             }
             <div asp-validation-summary="  ModelOnly  " class="text-danger">
@@ -53,8 +55,9 @@
                 <input asp-for="@Model.UserGroup.GroupID" class="form-control" readonly/>
                 <span asp-validation-for="@Model.UserGroup.GroupID" class="text-danger" readonly></span>
             </div>
+            <p></p>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Add user" class="btn btn-primary" />
             </div>
         </form>
     </div>

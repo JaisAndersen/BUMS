@@ -47,7 +47,7 @@ ViewData["Title"] = "Groups";
                 <p>
                     @if(Model.UId == 0)
                     {
-                    <a asp-page="/User/GetUser" asp-route-gid="@item.GroupId">Add a user to group</a>
+                    <a asp-page="/User/GetUser" asp-route-gid="@item.GroupId">Add a user to this group</a>
                     }
                     else
                     {

@@ -1,4 +1,4 @@
-﻿namespace BUMS.Services.Interfaces
+﻿namespace BUMS
 {
     public interface IGroupService
     {

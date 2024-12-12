@@ -1,7 +1,6 @@
-﻿using BUMS.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BUMS.Services
+namespace BUMS
 {
     public class GroupService : IGroupService
     {
@@ -41,7 +40,7 @@ namespace BUMS.Services
         }
         public void UpdateGroup(Group group, string GroupName)
         {
-            using (var context = new BUMSDbContext())
+            using (context)
             {
                 var entity = context.Groups.FirstOrDefault(item => item.GroupId == group.GroupId);
                 if (entity != null)
