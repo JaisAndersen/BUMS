@@ -10,7 +10,7 @@ namespace BUMS
         [Required]
         [Display(Name = "AccessName")]
         [MaxLength(50), MinLength(0)]
-        public string? AccessName { get; set; }
+        public string AccessName { get; set; }
         [Required]
         [Display(Name = "System name")]
         [MaxLength(50), MinLength(0)]

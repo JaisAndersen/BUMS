@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BUMS
 {
@@ -13,7 +11,7 @@ namespace BUMS
         [Required]
         [Display(Name = "Group name")]
         [StringLength(50)]
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -25,6 +23,6 @@ namespace BUMS
         public int AccessID { get; set; }
 
         [ValidateNever]
-        public virtual ICollection<UserGroup> UserGroups { get; set; }
+        public virtual ICollection<UserGroup>? UserGroups { get; set; }
     }
 }

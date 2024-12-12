@@ -28,7 +28,7 @@ namespace BUMS
         }
         public IEnumerable<Group> GetGroup()
         {
-            return context.Groups;
+            return context?.Groups;
         }   
         public Group GetGroupById(int id)
         {

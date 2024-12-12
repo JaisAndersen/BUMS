@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using BUMS.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using BUMS;
 
 namespace BUMS
 {
@@ -12,6 +15,8 @@ namespace BUMS
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<BUMSDbContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BUMSDbContext>();
             builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddTransient<IUserGroupService, UserGroupService>();

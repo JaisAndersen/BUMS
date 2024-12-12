@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace BUMS
 {
-    public class BUMSDbContext : DbContext
+    public class BUMSDbContext : IdentityDbContext<User>
     {
         public BUMSDbContext(DbContextOptions<BUMSDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
