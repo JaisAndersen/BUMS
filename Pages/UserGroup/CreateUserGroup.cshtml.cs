@@ -39,7 +39,7 @@ namespace BUMS
             User = userService.GetUserById(uid);
             UserGroup = new UserGroup() { GroupID = gid, UserID = uid, User = User };
         }
-        public IActionResult OnPost(int uid, int gid)
+        public IActionResult OnPost()
         {
             //if (!ModelState.IsValid)
             //{
@@ -51,7 +51,7 @@ namespace BUMS
             }
             else
             {
-                errorMessage = "Bruger findes i gruppen allerede";
+                errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
                 return Page();
             }
 
