@@ -9,5 +9,6 @@
         public IEnumerable<Group> FilterGroupByName(string filter);
         public void UpdateGroup(Group group, string groupName);
         public List<Access> GetAllAccess();
+        public User GetUserById(int id);
     }
 }

@@ -34,7 +34,7 @@ namespace BUMS
         }
         public IEnumerable<User> GetUser()
         {            
-            return context.Users;
+            return context?.Users;
         }
 
         public void UpdateUser(User user, string userName)

@@ -28,7 +28,7 @@ namespace BUMS
         }
         public IEnumerable<Group> GetGroup()
         {
-            return context.Groups;
+            return context?.Groups;
         }   
         public Group GetGroupById(int id)
         {
@@ -52,7 +52,12 @@ namespace BUMS
         }
         public List<Access> GetAllAccess()
         {
-            return context.Accesss.ToList();
+            return context.Access.ToList();
+        }
+        public User GetUserById(int ID)
+        {
+            //return context.Groups.FirstOrDefault(u => u.UserGroups.FirstOrDefault(c=>c.UserID == ID));
+            throw new NotImplementedException();
         }
     }
 }
