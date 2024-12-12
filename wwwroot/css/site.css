@@ -19,10 +19,10 @@ html {
 
 body {
     margin-bottom: 60px;    
-    background: rgba(20, 52, 71, 1);
-    color: #ffffff    
+    /*background: rgba(20, 52, 71, 1);
+    color: #ffffff */   
 }
-footer{
-    background: #ffffff;
-    color: black
-}
+/*footer {
+    background: #rgba(20, 52, 71, 1);
+    color: white
+}*/
