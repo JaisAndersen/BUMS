@@ -30,22 +30,22 @@ namespace BUMS
         {
             return context.Groups;
         }   
-        public Group GetGroupById(int ID)
+        public Group GetGroupById(int id)
         {
             Group? group = context.Groups
                 .Include(s => s.UserGroups).ThenInclude(n=>n.User)
                 .AsNoTracking()
-                .FirstOrDefault(m=>m.GroupId == ID);
+                .FirstOrDefault(m=>m.GroupID == id);
             return group;
         }
-        public void UpdateGroup(Group group, string GroupName)
+        public void UpdateGroup(Group group, string groupName)
         {
             using (context)
             {
-                var entity = context.Groups.FirstOrDefault(item => item.GroupId == group.GroupId);
+                var entity = context.Groups.FirstOrDefault(item => item.GroupID == group.GroupID);
                 if (entity != null)
                 {
-                    entity.GroupName = GroupName;
+                    entity.GroupName = groupName;
                     context.SaveChanges();
                 }
             }

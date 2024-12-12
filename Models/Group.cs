@@ -8,7 +8,7 @@ namespace BUMS
     public class Group
     {
         [Display(Name = "Group id")]
-        public int GroupId { get; set; }
+        public int GroupID { get; set; }
 
         [Required]
         [Display(Name = "Group name")]

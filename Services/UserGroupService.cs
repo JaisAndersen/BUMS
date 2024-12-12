@@ -13,13 +13,13 @@ namespace BUMS
         {
             return context.UserGroups.Include(s => s.User);
         }
-        public void AddUserGroup(UserGroup UserGroup)
+        public void AddUserGroup(UserGroup userGroup)
         {
-            context.UserGroups.Add(UserGroup);
+            context.UserGroups.Add(userGroup);
             context.SaveChanges();
         }
         public bool IsUserInGroup(User user, Group group, UserGroup? userGroup){
-            UserGroup? checkUG = new UserGroup() { UserID = user.UserID, GroupID = group.GroupId, User = user };
+            UserGroup checkUG = new UserGroup() { UserID = user.UserID, GroupID = group.GroupID, User = user };
 
             List<UserGroup> userGroups = GetUserGroups().ToList();
 

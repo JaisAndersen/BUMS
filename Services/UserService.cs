@@ -12,12 +12,12 @@ namespace BUMS
             context.Users.Add(user);
             context.SaveChangesAsync();
         }
-        public User GetUserById(int ID)
+        public User GetUserById(int id)
         {
             User? user = context.Users
                 .Include(u => u.UserGroup).ThenInclude(g => g.Group)
                 .AsNoTracking()
-                .FirstOrDefault(m => m.UserID == ID);
+                .FirstOrDefault(m => m.UserID == id);
             return user;
         }
         public void DeleteUser(User user)
