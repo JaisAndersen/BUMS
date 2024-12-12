@@ -13,9 +13,9 @@ namespace BUMS
         {
             this.service = service;
         }
-        public IActionResult OnGet(int Id)
+        public IActionResult OnGet(int id)
         {
-            user = service.GetUserById(Id);
+            user = service.GetUserById(id);
            
             return Page();
         }
