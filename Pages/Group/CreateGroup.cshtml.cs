@@ -18,7 +18,7 @@ namespace BUMS
             this.context = context;
             this.service = service;
             
-            SelectListAccess = new SelectList(context.Accesss, "AccessID","AccessName",selectedValue: typeof(Access));
+            SelectListAccess = new SelectList(context.Access, "AccessID","AccessName",selectedValue: typeof(Access));
         }        
         public IActionResult OnGet()
         {

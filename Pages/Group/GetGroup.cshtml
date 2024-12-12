@@ -34,7 +34,7 @@ ViewData["Title"] = "Groups";
         @foreach (var item in Model.Groups)
         {
         <tr>
-            <td>@item.GroupId</td>
+            <td>@item.GroupID</td>
             <td>@item.GroupName</td>
             <td>@item.CreatedAt</td>
             <td>@item.CreatedBy</td>
@@ -47,13 +47,13 @@ ViewData["Title"] = "Groups";
                 <p>
                     @if(Model.UId == 0)
                     {
-                    <a asp-page="/User/GetUser" asp-route-gid="@item.GroupId">Add a user to this group</a>
+                    <a asp-page="/User/GetUser" asp-route-gid="@item.GroupID">Add a user to this group</a>
                     }
                     else
                     {
                     Dictionary<string,string> routeValues = new Dictionary<string, string>();
                         routeValues.Add("uid",Model.UId.ToString());
-                        routeValues.Add("gid", item.GroupId.ToString());
+                        routeValues.Add("gid", item.GroupID.ToString());
                         <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add user to this group</a>
 
                         }
@@ -61,12 +61,12 @@ ViewData["Title"] = "Groups";
             </td>
             <td>
                 <p>
-                    <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupId">Update</a>
+                    <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupID">Update</a>
                 </p>
             </td>
             <td>
                 <p>
-                    <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupId">Delete </a>
+                    <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupID">Delete </a>
                 </p>
             </td>
         </tr>

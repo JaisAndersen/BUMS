@@ -12,12 +12,12 @@ namespace BUMS
             context.Users.Add(user);
             context.SaveChangesAsync();
         }
-        public User GetUserById(int ID)
+        public User GetUserById(int id)
         {
             User? user = context.Users
                 .Include(u => u.UserGroup).ThenInclude(g => g.Group)
                 .AsNoTracking()
-                .FirstOrDefault(m => m.UserID == ID);
+                .FirstOrDefault(m => m.UserID == id);
             return user;
         }
         public void DeleteUser(User user)
@@ -33,19 +33,18 @@ namespace BUMS
             return this.context.Set<User>().Where(s => s.UserName.Contains(filter)).AsNoTracking().ToList();
         }
         public IEnumerable<User> GetUser()
-        {
-            
-            return context.Users;
+        {            
+            return context?.Users;
         }
 
-        public void UpdateUser(User user, string UserName)
+        public void UpdateUser(User user, string userName)
         {
                 using (context)
                 {
                     var entity = context.Users.FirstOrDefault(item => item.UserID == user.UserID);
                     if (entity != null)
                     {
-                        entity.UserName = UserName;
+                        entity.UserName = userName;
                         context.SaveChanges();
                     }
                 }
