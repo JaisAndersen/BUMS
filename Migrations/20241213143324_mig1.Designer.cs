@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BUMS.Migrations
 {
     [DbContext(typeof(BUMSDbContext))]
-    [Migration("20241213113204_mig1")]
+    [Migration("20241213143324_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -161,10 +161,11 @@ namespace BUMS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("UserGroupID"));
 
-                    b.Property<int?>("GroupID")
+                    b.Property<int>("GroupID")
                         .HasColumnType("int");
 
                     b.Property<string>("UserID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserGroupID");
@@ -328,11 +329,15 @@ namespace BUMS.Migrations
                 {
                     b.HasOne("BUMS.Group", "Group")
                         .WithMany("UserGroups")
-                        .HasForeignKey("GroupID");
+                        .HasForeignKey("GroupID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BUMS.User", "User")
                         .WithMany("UserGroup")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Group");
 
