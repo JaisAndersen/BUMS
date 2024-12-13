@@ -11,7 +11,7 @@ namespace BUMS
         }
         public IEnumerable<UserGroup?>? GetUserGroups()
         {
-            return context?.UserGroups.Include(s => s.User);
+            return context?.UserGroups.Include(s => s.User).AsNoTracking();
         }
         public void AddUserGroup(UserGroup? userGroup)
         {
@@ -20,18 +20,14 @@ namespace BUMS
         }
         public bool IsUserInGroup(User? user, Group? group, UserGroup? userGroup){
             UserGroup? checkUG = new UserGroup() { User = user, Group = group };
-            checkUG.User.UserNavigationID = user.UserNavigationID;
-            checkUG.Group.GroupID = group.GroupID;
-
 
             List<UserGroup?>? userGroups = GetUserGroups().ToList();
 
             foreach (UserGroup? ug in userGroups)
             {
-                if (ug.Group?.GroupID == checkUG.Group?.GroupID && ug.User?.UserNavigationID == checkUG.User?.UserNavigationID)
+                if (ug.Group?.GroupID == checkUG.Group?.GroupID && ug.User?.Id == checkUG.User?.Id)
                     return true;
             }
-
             return false;
         }
     }

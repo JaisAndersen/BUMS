@@ -4,7 +4,7 @@ namespace BUMS
     {
         public void AddUser(User? user);
 
-        public User? GetUserById(int? ID);
+        public User? GetUserById(string? ID);
 
         public void DeleteUser(User? user);
 

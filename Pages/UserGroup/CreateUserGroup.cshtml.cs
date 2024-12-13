@@ -18,8 +18,8 @@ namespace BUMS
         [BindProperty]
         public UserGroup UserGroup { get; set; }
 
-        public int UId { get; set; }
-        public int GId { get; set; }
+        public string? UId { get; set; }
+        public int? GId { get; set; }
 
         public CreateUserGroupModel(IUserGroupService service, 
             IUserService userService, 
@@ -30,26 +30,17 @@ namespace BUMS
             this.service = service;
 
         }
-        public void OnGet(int uid, int gid)
+        public void OnGet(string? uid, int? gid)
         {
             UId = uid;
             GId = gid;
 
             Group = groupService.GetGroupById(gid);
             User = userService.GetUserById(uid);
-
-            //UserGroup = new UserGroup() { User = User, Group = Group };
         }
-        public IActionResult OnPost(int uid, int gid)
+        public IActionResult OnPost(string? uid, int? gid)
         {
-            Group = groupService.GetGroupById(gid);
-            User = userService.GetUserById(uid);
-
-            UserGroup = new UserGroup() { User = User, Group = Group };
-            UserGroup.GroupID = gid;
-            UserGroup.UserNavigationID = uid;
-            UserGroup.User.Id = User.Id;
-
+            UserGroup = new UserGroup() { GroupID = gid, UserID = uid, User = User };
 
             //if (!ModelState.IsValid)
             //{

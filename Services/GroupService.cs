@@ -24,11 +24,11 @@ namespace BUMS
         }
         public IEnumerable<Group?>? FilterGroupByName(string? filter)
         {
-            return context.Groups?.Where(g => g.GroupName.Contains(filter));
+            return context.Groups?.Where(g => g.GroupName.Contains(filter)).AsNoTracking();
         }
         public IEnumerable<Group?>? GetGroup()
         {
-            return context?.Groups;
+            return context?.Groups.AsNoTracking();
         }   
         public Group? GetGroupById(int? id)
         {
@@ -53,11 +53,6 @@ namespace BUMS
         public List<Access?>? GetAllAccess()
         {
             return context?.Access?.ToList();
-        }
-        public User? GetUserById(int? ID)
-        {
-            //return context.Groups.FirstOrDefault(u => u.UserGroups.FirstOrDefault(c=>c.UserID == ID));
-            throw new NotImplementedException();
         }
     }
 }
