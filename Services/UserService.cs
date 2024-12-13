@@ -11,7 +11,7 @@ namespace BUMS
         {
             user.UserNavigationID = GetUsers().Count() + 1;
             context?.Users?.Add(user);
-            context?.SaveChangesAsync();
+            context?.SaveChanges();
         }
         public User? GetUserById(string? id)
         {

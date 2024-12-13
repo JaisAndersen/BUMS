@@ -23,7 +23,7 @@ namespace BUMS
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
 
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
         [ValidateNever]
         public virtual ICollection<UserGroup> UserGroup { get; set; }
