@@ -21,6 +21,10 @@ namespace BUMS
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddTransient<IUserGroupService, UserGroupService>();
             
+            builder.Services.AddAuthorization(options =>
+                    options.AddPolicy("Admin", policy =>
+                        policy.RequireAuthenticatedUser()
+                        .RequireClaim("IsAdmin", bool.TrueString)));
 
             var app = builder.Build();
 
