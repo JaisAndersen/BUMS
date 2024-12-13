@@ -40,7 +40,10 @@ namespace BUMS
         }
         public IActionResult OnPost(string? uid, int? gid)
         {
-            UserGroup = new UserGroup() { GroupID = gid, UserID = uid, User = User };
+            User = userService.GetUserById(uid);
+            Group = groupService.GetGroupById(gid);
+
+            UserGroup = new UserGroup() { GroupID = gid, UserID = uid };
 
             //if (!ModelState.IsValid)
             //{
