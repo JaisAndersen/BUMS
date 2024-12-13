@@ -5,14 +5,20 @@
 }
 
 <div class="text-center">
-    <h1>BUMS</h1>
-    <img src="/Pictures/BUMSLogo.jpg" alt="BUMS Logo">
+    <h1>BUMS -</h1>   
     <h2>Bitmax User Management System</h2>
-    <p>Select options in top bar</p>
+    <br /><br />
 </div>
-<div>
-    <h2>@Model.Counter.UserCount</h2>
+
+<div class="card mx-auto" style="width: 25rem;">
+    <img src="/Pictures/BUMSLogo.jpg" alt="BUMS Logo" class="card-img-top">    
+        <ul class="list-group list-group-flush">
+            <li style="background-color: rgba(20, 52, 71); color: white;" class="list-group-item text-white text-center">
+                <h2>Users in system: @Model.Counter.UserCount</h2>
+             </li>
+            <li style="background-color: rgba(20, 52, 71); color: white;" class="list-group-item text-white text-center">
+                <h2>Groups in system: @Model.Counter.GroupCount</h2>
+             </li>
+        </ul>    
 </div>
-<div>
-    <h2>@Model.Counter.GroupCount</h2>
-</div>
+
