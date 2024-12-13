@@ -10,8 +10,9 @@ namespace BUMS
         {
             this.service = service;
         }
+        [BindProperty]
         public User User { get; set; }
-        public IActionResult OnGet(int uid)
+        public IActionResult OnGet(string? uid)
         {
             User = service.GetUserById(uid);
             if (User == null)

@@ -13,13 +13,13 @@ namespace BUMS{
         public Group? Group { get; set; }
 
         public int GId { get; set; }
-        public int UId { get; set; }
+        public string UId { get; set; }
 
         public GetGroupModel(IGroupService service)
         {
             context = service;
         }
-        public void OnGet(int gid, int uid)
+        public void OnGet(int gid, string uid)
         {
             UId = uid;
             GId = gid;

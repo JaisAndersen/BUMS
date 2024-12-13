@@ -201,24 +201,22 @@ namespace BUMS.Migrations
                 {
                     UserGroupID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserNavigationID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    GroupID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserGroups", x => x.UserGroupID);
                     table.ForeignKey(
-                        name: "FK_UserGroups_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_UserGroups_AspNetUsers_UserID",
+                        column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UserGroups_Groups_GroupID",
                         column: x => x.GroupID,
                         principalTable: "Groups",
-                        principalColumn: "GroupID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "GroupID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -271,9 +269,9 @@ namespace BUMS.Migrations
                 column: "GroupID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGroups_UserId",
+                name: "IX_UserGroups_UserID",
                 table: "UserGroups",
-                column: "UserId");
+                column: "UserID");
         }
 
         /// <inheritdoc />

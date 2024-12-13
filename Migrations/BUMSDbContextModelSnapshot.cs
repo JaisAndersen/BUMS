@@ -152,26 +152,23 @@ namespace BUMS.Migrations
 
             modelBuilder.Entity("BUMS.UserGroup", b =>
                 {
-                    b.Property<int>("UserGroupID")
+                    b.Property<int?>("UserGroupID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserGroupID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("UserGroupID"));
 
-                    b.Property<int>("GroupID")
+                    b.Property<int?>("GroupID")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("UserNavigationID")
-                        .HasColumnType("int");
 
                     b.HasKey("UserGroupID");
 
                     b.HasIndex("GroupID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("UserGroups");
                 });
@@ -328,13 +325,11 @@ namespace BUMS.Migrations
                 {
                     b.HasOne("BUMS.Group", "Group")
                         .WithMany("UserGroups")
-                        .HasForeignKey("GroupID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupID");
 
                     b.HasOne("BUMS.User", "User")
                         .WithMany("UserGroup")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserID");
 
                     b.Navigation("Group");
 

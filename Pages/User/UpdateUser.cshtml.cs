@@ -13,7 +13,7 @@ namespace BUMS
         {
             this.service = service;
         }
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(string id)
         {
             user = service.GetUserById(id);
            

@@ -20,6 +20,7 @@
         <tr>
             <th>User ID</th>
             <th>Name</th>
+            <th>Email</th>
             <th>Created At</th>
             <th>Created By</th>
             <th></th>
@@ -38,13 +39,14 @@
                 <tr>
                     <td>@item.UserNavigationID</td>
                     <td>@item.UserName</td>
+                    <td>@item.Email</td>
                     <td>@item.CreatedAt</td>
                     <td>@item.CreatedBy</td>
                     <td>
                     @{
                         var routeValues = new Dictionary<string, string>();
                             routeValues.Add("gid", Model.GId.ToString());
-                        routeValues.Add("uid", item.UserNavigationID.ToString());
+                        routeValues.Add("uid", item.Id);
                     }
                     @if (Model.GId != 0)
                     {
@@ -53,16 +55,16 @@
                     </td>
                     @if(Model.GId == 0){
                     <td>
-                            <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.UserNavigationID"> See groups </a>
+                            <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
                     </td>
                     <td>
                         <p>
-                            <a asp-page="/User/UpdateUser" asp-route-id="@item.UserNavigationID">Update</a>
+                            <a asp-page="/User/UpdateUser" asp-route-id="@item.Id">Update</a>
                         </p>
                     </td>
                     <td>
                         <p>
-                            <a asp-page="/User/DeleteUser" asp-route-id="@item.UserNavigationID">Delete</a>
+                            <a asp-page="/User/DeleteUser" asp-route-id="@item.Id">Delete</a>
                         </p>
                     </td>
                     }

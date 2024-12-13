@@ -14,12 +14,13 @@ namespace BUMS
         {
             this.service = service;
         }
-        public void OnGet(int id)
+        public void OnGet(string id)
         {
             user = service.GetUserById(id);
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(string id)
         {
+            user = service.GetUserById(id);
             service.DeleteUser(user);
 
             return RedirectToPage("GetUser");
