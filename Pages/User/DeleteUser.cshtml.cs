@@ -6,7 +6,7 @@ namespace BUMS
     public class DeleteUserModel : PageModel
     {
         [BindProperty]
-        public User user { get; set; }
+        public User? user { get; set; }
 
         IUserService service;
 

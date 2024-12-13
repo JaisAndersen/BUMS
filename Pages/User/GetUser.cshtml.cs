@@ -6,9 +6,9 @@ namespace BUMS{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
         [BindProperty(SupportsGet = true)]
-        public string FilterCriteria { get; set; }
+        public string? FilterCriteria { get; set; }
 
-        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<User>? Users { get; set; }
 
         IUserService service { get; set; }
 
@@ -26,7 +26,7 @@ namespace BUMS{
             }
             else
             {
-                Users = service.GetUser();
+                Users = service.GetUsers();
             }
         }
     }

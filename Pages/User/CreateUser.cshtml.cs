@@ -6,7 +6,7 @@ namespace BUMS
     public class CreateUserModel : PageModel
     {
         [BindProperty]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         IUserService service;
         public CreateUserModel(IUserService service)
@@ -26,6 +26,7 @@ namespace BUMS
             {
                 User.CreatedAt = DateTime.Now;
                 User.CreatedBy = 1;
+                User.EmailConfirmed = true;
                 service.AddUser(User);
             }            
             return RedirectToPage("GetUser");

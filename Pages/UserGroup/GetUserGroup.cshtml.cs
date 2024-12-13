@@ -4,7 +4,7 @@ namespace BUMS
 {
     public class GetUserGroupModel : PageModel
     {
-        public IEnumerable<UserGroup> UserGroups { get; set; }
+        public IEnumerable<UserGroup>? UserGroups { get; set; }
         IUserGroupService service;
         public GetUserGroupModel(IUserGroupService service)
         {

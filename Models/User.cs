@@ -6,12 +6,19 @@ namespace BUMS
 {
     public class User : IdentityUser
     {
-        public int UserID { get; set; }
+        //public int UserID { get; set; }
+        [Display(Name ="User ID")]
+        public int UserNavigationID { get; set; }
 
         [Required]
         [Display(Name = "User Name")]
         [StringLength(50)]
-        public string? UserName { get; set; }
+        public override string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "User Email")]
+        [DataType(DataType.EmailAddress)]
+        public override string Email { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
@@ -19,6 +26,6 @@ namespace BUMS
         public int CreatedBy { get; set; }
 
         [ValidateNever]
-        public virtual ICollection<UserGroup>? UserGroup { get; set; }
+        public virtual ICollection<UserGroup> UserGroup { get; set; }
     }
 }

@@ -9,14 +9,14 @@ namespace BUMS
         private IUserService userService;
         private IGroupService groupService;
 
-        public string errorMessage = "";
+        public string? errorMessage = "";
         [BindProperty]
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
         [BindProperty]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [BindProperty]
-        public UserGroup UserGroup { get; set; } = new UserGroup();
+        public UserGroup UserGroup { get; set; }
 
         public int UId { get; set; }
         public int GId { get; set; }
@@ -28,19 +28,29 @@ namespace BUMS
             this.userService = userService;
             this.groupService = groupService;
             this.service = service;
+
         }
         public void OnGet(int uid, int gid)
         {
             UId = uid;
             GId = gid;
-            UserGroup.GroupID = gid;
-            UserGroup.UserID = uid;
+
             Group = groupService.GetGroupById(gid);
             User = userService.GetUserById(uid);
-            UserGroup = new UserGroup() { GroupID = gid, UserID = uid, User = User };
+
+            //UserGroup = new UserGroup() { User = User, Group = Group };
         }
         public IActionResult OnPost(int uid, int gid)
         {
+            Group = groupService.GetGroupById(gid);
+            User = userService.GetUserById(uid);
+
+            UserGroup = new UserGroup() { User = User, Group = Group };
+            UserGroup.GroupID = gid;
+            UserGroup.UserNavigationID = uid;
+            UserGroup.User.Id = User.Id;
+
+
             //if (!ModelState.IsValid)
             //{
             //    return Page();
@@ -51,7 +61,7 @@ namespace BUMS
             }
             else
             {
-                errorMessage = "Bruger findes i gruppen allerede";
+                errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
                 return Page();
             }
 

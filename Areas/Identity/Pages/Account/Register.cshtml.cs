@@ -24,6 +24,8 @@ namespace BUMS.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private IUserService service;
+
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IUserStore<User> _userStore;
@@ -32,12 +34,14 @@ namespace BUMS.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
+            IUserService service,
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
+            this.service = service;
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
@@ -114,6 +118,9 @@ namespace BUMS.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.UserNavigationID = service.GetUsers().Count() + 1; 
+                user.CreatedAt = DateTime.Now;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

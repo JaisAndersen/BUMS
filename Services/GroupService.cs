@@ -9,52 +9,52 @@ namespace BUMS
         {
             context = service;
         }
-        public void AddGroup(Group group)
+        public void AddGroup(Group? group)
         {
-            context.Groups.Add(group);
-            context.SaveChanges();
+            context?.Groups?.Add(group);
+            context?.SaveChanges();
         }
-        public void DeleteGroup(Group group)
+        public void DeleteGroup(Group? group)
         {
             if (group != null)
             {
-                context.Groups.Remove(group);
-                context.SaveChanges();
+                context?.Groups?.Remove(group);
+                context?.SaveChanges();
             }
         }
-        public IEnumerable<Group> FilterGroupByName(string filter)
+        public IEnumerable<Group?>? FilterGroupByName(string? filter)
         {
-            return context.Groups.Where(g => g.GroupName.Contains(filter));
+            return context.Groups?.Where(g => g.GroupName.Contains(filter));
         }
-        public IEnumerable<Group> GetGroup()
+        public IEnumerable<Group?>? GetGroup()
         {
             return context?.Groups;
         }   
-        public Group GetGroupById(int id)
+        public Group? GetGroupById(int? id)
         {
-            Group? group = context.Groups
+            Group? group = context?.Groups?
                 .Include(s => s.UserGroups).ThenInclude(n=>n.User)
                 .AsNoTracking()
                 .FirstOrDefault(m=>m.GroupID == id);
             return group;
         }
-        public void UpdateGroup(Group group, string groupName)
+        public void UpdateGroup(Group? group, string? groupName)
         {
             using (context)
             {
-                var entity = context.Groups.FirstOrDefault(item => item.GroupID == group.GroupID);
+                var entity = context?.Groups.FirstOrDefault(item => item.GroupID == group.GroupID);
                 if (entity != null)
                 {
                     entity.GroupName = groupName;
-                    context.SaveChanges();
+                    context?.SaveChanges();
                 }
             }
         }
-        public List<Access> GetAllAccess()
+        public List<Access?>? GetAllAccess()
         {
-            return context.Access.ToList();
+            return context?.Access?.ToList();
         }
-        public User GetUserById(int ID)
+        public User? GetUserById(int? ID)
         {
             //return context.Groups.FirstOrDefault(u => u.UserGroups.FirstOrDefault(c=>c.UserID == ID));
             throw new NotImplementedException();

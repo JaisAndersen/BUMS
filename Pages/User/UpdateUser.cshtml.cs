@@ -6,7 +6,7 @@ namespace BUMS
     public class UpdateUserModel : PageModel
     {
         [BindProperty]
-        public User user { get; set; }
+        public User? user { get; set; }
         private IUserService service;
 
         public UpdateUserModel(IUserService service)
@@ -22,10 +22,10 @@ namespace BUMS
 
         public IActionResult OnPost()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             service.UpdateUser(user, user.UserName);
             return RedirectToPage("GetUser");
         }
