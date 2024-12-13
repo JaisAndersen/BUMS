@@ -20,8 +20,9 @@ namespace BUMS
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string id)
         {
+            user = service.GetUserById(id);
             if (!ModelState.IsValid)
             {
                 return Page();
