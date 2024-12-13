@@ -20,13 +20,9 @@ namespace BUMS
         }
         public IActionResult OnPost(string id)
         {
-            user = service.GetUserById(id);
             service.DeleteUser(user);
 
             return RedirectToPage("GetUser");
         }
     }
 }
-
-    
-

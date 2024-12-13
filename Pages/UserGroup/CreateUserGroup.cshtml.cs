@@ -38,7 +38,7 @@ namespace BUMS
             Group = groupService.GetGroupById(gid);
             User = userService.GetUserById(uid);
         }
-        public IActionResult OnPost(string? uid, int? gid)
+        public IActionResult OnPost(string? uid, int gid)
         {
             User = userService.GetUserById(uid);
             Group = groupService.GetGroupById(gid);

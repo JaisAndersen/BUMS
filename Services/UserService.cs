@@ -25,7 +25,7 @@ namespace BUMS
         {
             if (user != null)
             {
-                context?.Users?.Remove(user);
+                context?.Users?.Remove(GetUserById(user.Id));
                 context?.SaveChanges();
             }
         }
@@ -40,16 +40,17 @@ namespace BUMS
 
         public void UpdateUser(User? user, string? userName)
         {
-                using (context)
+            using (context)
+            {
+                var entity = context?.Users?.FirstOrDefault(item => item.Id == user.Id);
+                if (entity != null)
                 {
-                    var entity = context?.Users?.FirstOrDefault(item => item.UserNavigationID == user.UserNavigationID);
-                    if (entity != null)
-                    {
-                        entity.UserName = userName;
-                        context?.SaveChanges();
-                    }
+                    entity.UserName = userName;
+                    entity.Email = user.Email;
+                    context?.SaveChanges();
                 }
             }
         }
     }
+}
 

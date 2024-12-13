@@ -19,13 +19,13 @@ namespace BUMS
             context?.SaveChanges();
         }
         public bool IsUserInGroup(User? user, Group? group, UserGroup? userGroup){
-            UserGroup? checkUG = new UserGroup() { User = user, Group = group };
+            UserGroup? checkUG = new UserGroup() { UserID = user.Id, GroupID = group.GroupID };
 
             List<UserGroup?>? userGroups = GetUserGroups().ToList();
 
             foreach (UserGroup? ug in userGroups)
             {
-                if (ug.Group?.GroupID == checkUG.Group?.GroupID && ug.User?.Id == checkUG.User?.Id)
+                if (ug.Group?.GroupID == checkUG.Group?.GroupID && ug.UserID == checkUG.UserID)
                     return true;
             }
             return false;
