@@ -22,11 +22,15 @@ body {
     color: rgba(20, 52, 71);
 }
 footer {
-    background: rgba(20, 52, 71);
+    background: rgb(20, 52, 71);
     color: white
 }
 nav {
-    background: rgba(20, 52, 71);
+    background: rgb(20, 52, 71);
     color: white
 }
-
+.custom-btn {
+    background-color: rgb(20, 52, 71);
+    border-color: rgb(20, 52, 71);
+    color: white
+}
