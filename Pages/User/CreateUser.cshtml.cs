@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BUMS
 {
+    [Authorize]
     public class CreateUserModel : PageModel
     {
+        public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
         [BindProperty]
         public User? User { get; set; }
 
@@ -25,7 +28,7 @@ namespace BUMS
             else
             {
                 User.CreatedAt = DateTime.Now;
-                User.CreatedBy = 1;
+                User.CreatedBy = HttpContext.User.Identity.Name;
                 User.EmailConfirmed = true;
                 service.AddUser(User);
             }            

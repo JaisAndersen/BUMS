@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BUMS{
+    [Authorize]
     public class GetUserModel : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
@@ -17,8 +19,9 @@ namespace BUMS{
         }
         public int GId { get; set; }
 
-        public void OnGet(int gid)
+        public IActionResult OnGet(int gid)
         {
+            if(!IsAdmin) return Forbid();
             GId = gid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
@@ -28,6 +31,7 @@ namespace BUMS{
             {
                 Users = service.GetUsers();
             }
+            return Page();
         }
     }
 }
