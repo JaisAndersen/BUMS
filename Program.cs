@@ -1,7 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using BUMS.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-using BUMS;
 
 namespace BUMS
 {

@@ -1,17 +1,22 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BUMS
 {
     public class UserService : IUserService{
-        BUMSDbContext context;
+        private BUMSDbContext context;
+        
         public UserService(BUMSDbContext service){
             context = service;
         }
-        public void AddUser(User? user)
+        public async Task<IActionResult> AddUserAsync(User? user)
         {
-            user.UserNavigationID = GetUsers().Count() + 1;
-            context?.Users?.Add(user);
+            user.UserNavigationID = GetUsers().ToList().Count() + 1;
+            Bools(user);
+            
+            context?.Users?.AddAsync(user);
             context?.SaveChanges();
+            return null;
         }
         public User? GetUserById(string? id)
         {
@@ -50,6 +55,12 @@ namespace BUMS
                     context?.SaveChanges();
                 }
             }
+        }
+
+        private void Bools(User? user){
+            user.EmailConfirmed = true;
+            user.PhoneNumberConfirmed = false;
+            user.TwoFactorEnabled = false;
         }
     }
 }

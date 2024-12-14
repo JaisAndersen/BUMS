@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BUMS
 {
-        public class Access
+    public class Access
     {
         [Display(Name = "Access ID")]
         public int AccessID { get; set; }
@@ -15,7 +15,7 @@ namespace BUMS
         [Display(Name = "System Name")]
         [MaxLength(50), MinLength(0)]
         public string? SystemName { get; set; }
-        //public ICollection<UserGroup> UserGroups { get; set; }
+
         //public ICollection<Group> Groups { get; set; }
     }
 }

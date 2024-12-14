@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace BUMS
 {
     public interface IUserService
     {
-        public void AddUser(User? user);
+        public Task<IActionResult> AddUserAsync(User? user);
 
         public User? GetUserById(string? ID);
 
