@@ -10,7 +10,8 @@ namespace BUMS
             var connectionString = builder.Configuration.GetConnectionString("BumsConnection") ?? throw new InvalidOperationException("Connection string 'BumsConnection' not found.");
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages(options =>
+                options.Conventions.AuthorizePage("/User/CreateUser","Admin"));
             builder.Services.AddDbContext<BUMSDbContext>(options => options.UseSqlServer(connectionString));
 
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BUMSDbContext>();
