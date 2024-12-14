@@ -11,7 +11,7 @@ namespace BUMS
 
             // Add services to the container.
             builder.Services.AddRazorPages(options =>
-                options.Conventions.AuthorizePage("/User/CreateUser","Admin"));
+            options.Conventions.AuthorizePage("/User/ShowUserGroup", "Admin"));
             builder.Services.AddDbContext<BUMSDbContext>(options => options.UseSqlServer(connectionString));
 
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BUMSDbContext>();

@@ -37,7 +37,7 @@ namespace BUMS
         }
         public async Task<IActionResult> OnPost()
         {
-            if (!IsAdmin) { return Forbid(); }
+            if (!IsAdmin) return Forbid();
             if (!ModelState.IsValid)
             {
                 return Page();

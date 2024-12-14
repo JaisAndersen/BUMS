@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BUMS
 {
+    [Authorize]
     public class DeleteGroupModel : PageModel
     {
         [BindProperty]
         public Group? group { get; set; }
+        public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
         IGroupService service;
 
@@ -20,6 +23,7 @@ namespace BUMS
         }
         public IActionResult OnPost()
         {
+            if (!IsAdmin) return Forbid();
             service.DeleteGroup(group);
             return RedirectToPage("GetGroup");
         }

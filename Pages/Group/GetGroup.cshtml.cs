@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BUMS{
+    
     public class GetGroupModel : PageModel
     {
         private IGroupService context;
@@ -14,6 +16,7 @@ namespace BUMS{
 
         public int GId { get; set; }
         public string UId { get; set; }
+        public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
         public GetGroupModel(IGroupService service)
         {

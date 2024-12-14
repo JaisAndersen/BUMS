@@ -1,13 +1,16 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BUMS
 {
+    [Authorize]
     public class UpdateGroupModel : PageModel
     {
         [BindProperty]
         public Group? Group { get; set; }
         private IGroupService service;
+        public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
         public UpdateGroupModel(IGroupService service)
         {
@@ -22,6 +25,7 @@ namespace BUMS
 
         public IActionResult OnPost()
         {
+            if (!IsAdmin) return Forbid();
             if (!ModelState.IsValid)
             {
                 return Page();
