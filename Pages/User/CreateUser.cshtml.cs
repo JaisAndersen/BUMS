@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BUMS
 {
@@ -8,21 +10,33 @@ namespace BUMS
     public class CreateUserModel : PageModel
     {
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
+
+        private IUserStore<User> userStore;
+        private SignInManager<User> signInManager;
+        private UserManager<User> userManager;
+
         [BindProperty]
         public User? User { get; set; }
 
         public string Creator { get; set; }
 
         IUserService service;
-        public CreateUserModel(IUserService service)
+        public CreateUserModel(
+            IUserService service,
+            IUserStore<User> userStore,
+            SignInManager<User> signInManager,
+            UserManager<User> userManager)
         {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.userStore = userStore;
             this.service = service;
         }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-
+            return Page();   
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -31,10 +45,14 @@ namespace BUMS
             else
             {
                 User.CreatedAt = DateTime.Now;
-                User.EmailConfirmed = true;
-                service.AddUser(User);
+                User.CreatedBy = "System";
+
+                await userStore.SetUserNameAsync(User, User.UserName, CancellationToken.None);
+                await userManager.AddPasswordAsync(User,User.Password);
+                //await signInManager.SignInAsync(User,isPersistent:false);
+                await service.AddUserAsync(User);
             }            
             return RedirectToPage("GetUser");
-        }      
+        }
     }
 }

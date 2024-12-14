@@ -19,7 +19,7 @@ namespace BUMS{
         }
         public int GId { get; set; }
 
-        public IActionResult OnGet(int gid)
+        public ActionResult OnGet(int gid)
         {
             //if(!IsAdmin) return Forbid();
             GId = gid;
