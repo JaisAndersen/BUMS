@@ -119,7 +119,6 @@ namespace BUMS.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.UserNavigationID = service.GetUsers().Count() + 1; 
                 user.CreatedAt = DateTime.Now;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
