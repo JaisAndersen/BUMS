@@ -1,13 +1,17 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace BUMS
 {
+    [Authorize]
     public class CreateUserGroupModel : PageModel
     {
         private IUserGroupService service;
         private IUserService userService;
         private IGroupService groupService;
+        public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
         public string? errorMessage = "";
         [BindProperty]
@@ -40,6 +44,7 @@ namespace BUMS
         }
         public IActionResult OnPost(string? uid, int gid)
         {
+            if (!IsAdmin) return Forbid();
             User = userService.GetUserById(uid);
             Group = groupService.GetGroupById(gid);
 

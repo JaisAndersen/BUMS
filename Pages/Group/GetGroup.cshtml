@@ -5,9 +5,12 @@ ViewData["Title"] = "Groups";
 }
 
 <h3>List of Groups</h3>
-<p>
-    <a asp-page="/Group/CreateGroup">Create New Group</a>
-</p>
+@if (Model.IsAdmin)
+{
+    <p>
+        <a asp-page="/Group/CreateGroup">Create New Group</a>
+    </p>
+}
 <form>
     <p>
         Search: <input type="text" asp-for="FilterCriteria"/>
@@ -42,6 +45,9 @@ ViewData["Title"] = "Groups";
             </td>
             <td>
                 <p>
+                        @if (Model.IsAdmin)
+                        {
+                
                     @if(Model.UId == null)
                     {
                     <a asp-page="/User/GetUser" asp-route-gid="@item.GroupID">Add a user to this group</a>
@@ -53,20 +59,28 @@ ViewData["Title"] = "Groups";
                         routeValues.Add("gid", item.GroupID.ToString());
                         <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add user to this group</a>
 
+                    
+                
                     }
-                </p>
-            </td>
-            @if(Model.UId == null){
-            <td>
-                <p>
-                    <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupID">Update</a>
-                </p>
-            </td>
-            <td>
-                <p>
+                        }
+               </p>
+                </td>
+                    @if (Model.IsAdmin)
+                    {
+                            @if (Model.UId == null)
+                            {
+                                <td>
+                                    <p>
+                                        <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupID">Update</a>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
                     <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupID">Delete </a>
                 </p>
+                            }
             </td>
+            }
             }
         </tr>
         }
