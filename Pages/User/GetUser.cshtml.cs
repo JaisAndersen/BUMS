@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
 namespace BUMS{
-    //[Authorize]
+    [Authorize]
     public class GetUserModel : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
@@ -22,7 +22,7 @@ namespace BUMS{
 
         public ActionResult OnGet(int gid)
         {
-            //if(!IsAdmin) return Forbid();
+            if(!IsAdmin) return Forbid();
             GId = gid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
