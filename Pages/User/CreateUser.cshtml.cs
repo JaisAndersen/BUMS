@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace BUMS
 {
-    //[Authorize]
+    [Authorize]
     public class CreateUserModel : PageModel
     {
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
@@ -37,11 +37,11 @@ namespace BUMS
         }
         public async Task<IActionResult> OnGetAsync()
         {
+            if (!IsAdmin) return Forbid();
             return Page();   
         }
         public async Task<IActionResult> OnPost()
         {
-            //if (!IsAdmin) return Forbid();
             if (!ModelState.IsValid)
             {
                 return Page();
