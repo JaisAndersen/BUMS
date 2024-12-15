@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace BUMS
 {
-    [Authorize]
+    //[Authorize]
     public class CreateUserModel : PageModel
     {
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
@@ -13,6 +14,7 @@ namespace BUMS
         private IUserStore<User> userStore;
         private SignInManager<User> signInManager;
         private UserManager<User> userManager;
+        private IConfiguration configuration;
 
         [BindProperty]
         public User? User { get; set; }
@@ -24,8 +26,10 @@ namespace BUMS
             IUserService service,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IConfiguration configuration)
         {
+            this.configuration = configuration;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.userStore = userStore;
@@ -37,7 +41,7 @@ namespace BUMS
         }
         public async Task<IActionResult> OnPost()
         {
-            if (!IsAdmin) return Forbid();
+            //if (!IsAdmin) return Forbid();
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -51,6 +55,11 @@ namespace BUMS
                 await userManager.AddPasswordAsync(User,User.Password);
                 //await signInManager.SignInAsync(User,isPersistent:false);
                 await service.AddUserAsync(User);
+
+                string adminEmail = configuration["AdminEmail"] ?? string.Empty;
+                bool isAdmin = string.Compare(User.Email, adminEmail, true) == 0 ? true : false;
+                await userManager.AddClaimAsync(User, new Claim("IsAdmin",isAdmin.ToString()));
+
             }            
             return RedirectToPage("GetUser");
         }
