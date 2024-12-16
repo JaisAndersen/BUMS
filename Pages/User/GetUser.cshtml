@@ -24,6 +24,7 @@ ViewData["Title"] = "Users";
             <th>User ID</th>
             <th>Name</th>
             <th>Email</th>
+
            @if (Model.IsAdmin)
             {
                 <th>Created At</th>
@@ -36,6 +37,16 @@ ViewData["Title"] = "Users";
             <th></th>
             <th></th>
           
+
+
+            <th>Created At</th>
+            <th>Created By</th>
+            <th>Updated At</th>
+            <th>Updated By</th>
+            <th></th>    
+            <th></th>
+            <th></th>
+            <th></th>
 
         </tr>
     </thead>
@@ -55,11 +66,17 @@ ViewData["Title"] = "Users";
                     @if (Model.IsAdmin)
                     {
             <td>@item.CreatedAt</td>
+
                         
                     }
             <td>
                 <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
              </td>
+
+            <td>@item.CreatedBy</td>
+            <td>@item.UpdatedAt</td>
+            <td>@item.UpdatedBy</td>
+
             @if (Model.IsAdmin)
             {
             <td>
