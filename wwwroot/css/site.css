@@ -54,3 +54,11 @@ nav {
 .navbar-toggler:focus {
     box-shadow: none;
 }
+
+
+.nav-link.active {
+    background-color: rgb(20, 52, 71);
+    color:white
+}
+
+
