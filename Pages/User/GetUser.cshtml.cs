@@ -13,6 +13,9 @@ namespace BUMS{
 
         public IEnumerable<User>? Users { get; set; }
 
+        [BindProperty]
+        public User User { get; set; }
+
         IUserService service { get; set; }
 
         public GetUserModel(IUserService service){
@@ -22,10 +25,6 @@ namespace BUMS{
 
         public ActionResult OnGet(int gid)
         {
-
-
-            //if(!IsAdmin) return Forbid();
-
             GId = gid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
