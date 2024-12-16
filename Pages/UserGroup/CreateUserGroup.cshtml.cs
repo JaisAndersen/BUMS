@@ -54,16 +54,19 @@ namespace BUMS
             //{
             //    return Page();
             //}
-            if (!service.IsUserInGroup(User, Group, UserGroup))
+            foreach (UserGroup ug in User.UserGroup)
             {
-                service.AddUserGroup(UserGroup);
-            }
-            else
-            {
-                errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
-                return Page();
-            }
+                if (ug.GroupID != UserGroup.GroupID)
+                {
+                    service.AddUserGroup(UserGroup);
+                }
 
+                else
+                {
+                    errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
+                    return Page();
+                }
+            }
             return RedirectToPage("GetUserGroup");
         }
     }
