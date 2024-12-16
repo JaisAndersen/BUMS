@@ -22,7 +22,6 @@ namespace BUMS{
 
         public ActionResult OnGet(int gid)
         {
-            if(!IsAdmin) return Forbid();
             GId = gid;
             if (!String.IsNullOrEmpty(FilterCriteria))
             {

@@ -25,10 +25,13 @@
 
                 </tbody>
             </table>
+            @if (Model.IsAdmin)
+            {
             <p>
                 Add user to a group? Please Click here:
                 <a asp-page="/Group/GetGroup" asp-route-uid="@Model.User.Id">Add to a group</a>
             </p>
+            }
         </dd>
     </dl>
 </div>

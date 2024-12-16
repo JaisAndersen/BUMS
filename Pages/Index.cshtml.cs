@@ -9,7 +9,7 @@ namespace BUMS.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly BUMSDbContext _context;
-
+        public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
         public IndexModel(ILogger<IndexModel> logger, BUMSDbContext context)
         {
             _logger = logger;

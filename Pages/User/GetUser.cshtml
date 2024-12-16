@@ -24,11 +24,18 @@ ViewData["Title"] = "Users";
             <th>User ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Created At</th>
+           @if (Model.IsAdmin)
+            {
+                <th>Created At</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            }
             <th></th>
             <th></th>
             <th></th>
-            <th></th>    
+            <th></th>
+          
 
         </tr>
     </thead>
@@ -42,7 +49,17 @@ ViewData["Title"] = "Users";
             <td>@item.UserNavigationID</td>
             <td>@item.UserName</td>
             <td>@item.Email</td>
+            <td></td>
+                    <td></td>
+                    <td></td>
+                    @if (Model.IsAdmin)
+                    {
             <td>@item.CreatedAt</td>
+                        
+                    }
+            <td>
+                <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
+             </td>
             @if (Model.IsAdmin)
             {
             <td>
@@ -59,9 +76,6 @@ ViewData["Title"] = "Users";
             </td>
             @if (Model.GId == 0)
             {
-            <td>
-                <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
-            </td>
             <td>
                 <p>
                     <a asp-page="/User/UpdateUser" asp-route-id="@item.Id">Update</a>
