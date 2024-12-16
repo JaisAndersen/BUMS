@@ -34,7 +34,7 @@ namespace BUMS
                 return Page();
             }
             group.CreatedAt = DateTime.Now;
-            group.CreatedBy = 1;
+            group.CreatedBy = HttpContext.User.Identity.Name;
             group.AccessID = 1;
             service.AddGroup(group);
             return RedirectToPage("GetGroup");

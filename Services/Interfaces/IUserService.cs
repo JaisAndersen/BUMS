@@ -14,6 +14,6 @@ namespace BUMS
 
         public IEnumerable<User?>? GetUsers();
 
-        public void UpdateUser(User? user, string? userName);
+        public void UpdateUser(User? user, string? userName, string? updatedBy);
     }    
 }

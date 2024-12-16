@@ -5,6 +5,8 @@ namespace BUMS
     public class GroupService : IGroupService
     {
         BUMSDbContext context;
+
+       
         public GroupService(BUMSDbContext service)
         {
             context = service;
@@ -38,7 +40,7 @@ namespace BUMS
                 .FirstOrDefault(m=>m.GroupID == id);
             return group;
         }
-        public void UpdateGroup(Group? group, string? groupName)
+        public void UpdateGroup(Group? group, string? groupName, string? updatedBy)
         {
             using (context)
             {
@@ -46,6 +48,8 @@ namespace BUMS
                 if (entity != null)
                 {
                     entity.GroupName = groupName;
+                    entity.UpdatedAt = DateTime.Now;
+                    entity.UpdatedBy = updatedBy;
                     context?.SaveChanges();
                 }
             }

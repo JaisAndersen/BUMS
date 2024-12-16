@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace BUMS
@@ -43,7 +44,7 @@ namespace BUMS
             return context?.Users;
         }
 
-        public void UpdateUser(User? user, string? userName)
+        public void UpdateUser(User? user, string? userName, string? updatedBy)
         {
             using (context)
             {
@@ -52,6 +53,8 @@ namespace BUMS
                 {
                     entity.UserName = userName;
                     entity.Email = user.Email;
+                    entity.UpdatedAt = DateTime.Now;
+                    entity.UpdatedBy = updatedBy;
                     context?.SaveChanges();
                 }
             }

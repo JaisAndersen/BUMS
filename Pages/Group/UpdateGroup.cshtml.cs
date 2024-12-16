@@ -30,7 +30,7 @@ namespace BUMS
             {
                 return Page();
             }
-            service.UpdateGroup(Group, Group.GroupName);
+            service.UpdateGroup(Group, Group.GroupName, HttpContext.User.Identity.Name);
             return RedirectToPage("GetGroup");
         }
     }

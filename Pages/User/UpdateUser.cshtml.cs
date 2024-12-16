@@ -26,15 +26,7 @@ namespace BUMS
         public IActionResult OnPost(string id)
         {
             if (!IsAdmin) return Forbid();
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            User.UpdatedAt = DateTime.Now;
-            User.UpdatedBy = HttpContext.User.Identity.Name;
-
-            service.UpdateUser(User, User.UserName);
+            service.UpdateUser(User, User.UserName, HttpContext.User.Identity.Name);
             return RedirectToPage("GetUser");
         }
     }
