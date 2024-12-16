@@ -67,21 +67,21 @@ ViewData["Title"] = "Groups";
                 </td>
                     @if (Model.IsAdmin)
                     {
-                            @if (Model.UId == null)
-                            {
-                                <td>
-                                    <p>
-                                        <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupID">Update</a>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                    <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupID">Delete </a>
-                </p>
-                            }
-            </td>
-            }
-            }
+                        @if (Model.UId == null)
+                        {
+                            <td>
+                                <p>
+                                    <a asp-page="/Group/UpdateGroup" asp-route-id="@item.GroupID">Update</a>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <a asp-page="/Group/DeleteGroup" asp-route-id="@item.GroupID">Delete </a>
+                                </p>
+                                
+                            </td>
+                        }
+                    }
         </tr>
         }
         }
