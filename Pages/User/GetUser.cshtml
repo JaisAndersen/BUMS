@@ -27,7 +27,6 @@ ViewData["Title"] = "Users";
 
            @if (Model.IsAdmin)
             {
-
                 <th>Created At</th>
                 <th>Created By</th>
                 <th>Updated At</th>
@@ -35,13 +34,8 @@ ViewData["Title"] = "Users";
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
-                <th></th>
             }
             <th></th>
-            
-
-
         </tr>
     </thead>
     <tbody>
@@ -66,41 +60,34 @@ ViewData["Title"] = "Users";
                         <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
                     </td>
             @if (Model.IsAdmin)
-            {
-            <td>
-                @{
-                var routeValues = new Dictionary<string, string>();
-                    routeValues.Add("gid", Model.GId.ToString());
-                    routeValues.Add("uid", item.Id);
-                    }
-
-                    @if (Model.GId != 0)
                     {
-                    <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add this user to the group</a>
-                    }
-            </td>
-            @if (Model.GId == 0)
-            {
-            <td>
-                <p>
-                    <a asp-page="/User/UpdateUser" asp-route-id="@item.Id">Update</a>
-                </p>
-            </td>
-            <td>
-                <p>
-                    <a asp-page="/User/DeleteUser" asp-route-id="@item.Id">Delete</a>
-                </p>
-            </td>
-            @if(Model.IsAdmin)
-                            {
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                        <td>
+                            @{
+                                var routeValues = new Dictionary<string, string>();
+                                routeValues.Add("gid", Model.GId.ToString());
+                                routeValues.Add("uid", item.Id);
                             }
+
+                            @if (Model.GId != 0)
+                            {
+                                <a asp-page="/UserGroup/CreateUserGroup" asp-all-route-data="routeValues">Add this user to the group</a>
+                            }
+                        </td>
+                        @if (Model.GId == 0)
+                        {
+                            <td>
+                                <p>
+                                    <a asp-page="/User/UpdateUser" asp-route-id="@item.Id">Update</a>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <a asp-page="/User/DeleteUser" asp-route-id="@item.Id">Delete</a>
+                                </p>
+                            </td>
                         }
-            }
-            
-        </tr>
+                    }
+                </tr>
         }
         }
 </table>
