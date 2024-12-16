@@ -25,6 +25,12 @@ namespace BUMS
 
         public string? CreatedBy { get; set; }
 
+        public DateTime UpdatedAt { get; set; }
+
+        public string? UpdatedBy { get; set; }
+
+
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

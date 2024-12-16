@@ -8,7 +8,7 @@ namespace BUMS
     public class UpdateUserModel : PageModel
     {
         [BindProperty]
-        public User? user { get; set; }
+        public User? User { get; set; }
         private IUserService service;
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
@@ -18,7 +18,7 @@ namespace BUMS
         }
         public IActionResult OnGet(string id)
         {
-            user = service.GetUserById(id);
+            User = service.GetUserById(id);
            
             return Page();
         }
@@ -30,7 +30,11 @@ namespace BUMS
             {
                 return Page();
             }
-            service.UpdateUser(user, user.UserName);
+
+            User.UpdatedAt = DateTime.Now;
+            User.UpdatedBy = HttpContext.User.Identity.Name;
+
+            service.UpdateUser(User, User.UserName);
             return RedirectToPage("GetUser");
         }
     }

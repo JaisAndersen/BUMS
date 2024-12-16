@@ -49,7 +49,7 @@ namespace BUMS
             else
             {
                 User.CreatedAt = DateTime.Now;
-                User.CreatedBy = "System";
+                User.CreatedBy = HttpContext.User.Identity.Name;
 
                 await userStore.SetUserNameAsync(User, User.UserName, CancellationToken.None);
                 await userManager.AddPasswordAsync(User,User.Password);
