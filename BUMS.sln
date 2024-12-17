@@ -5,8 +5,6 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BUMS", "BUMS.csproj", "{9178667E-0169-44F0-AB2A-4749592180A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BUMSTest", "..\BUMSTest\BUMSTest.csproj", "{81584D54-B4A9-4BC6-AA3C-8A43629128A9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{9178667E-0169-44F0-AB2A-4749592180A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9178667E-0169-44F0-AB2A-4749592180A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9178667E-0169-44F0-AB2A-4749592180A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81584D54-B4A9-4BC6-AA3C-8A43629128A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81584D54-B4A9-4BC6-AA3C-8A43629128A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81584D54-B4A9-4BC6-AA3C-8A43629128A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81584D54-B4A9-4BC6-AA3C-8A43629128A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
