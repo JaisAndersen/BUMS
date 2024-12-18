@@ -52,11 +52,11 @@ namespace BUMS
                 return Page();
             }
             else{
-                User.UserNavigationID = AddUserNavID();
                 var result = await userManager.CreateAsync(User, User.Password);
 
                 if(result.Succeeded){
                     Bools(User);
+                    User.UserNavigationID = AddUserNavID();
 
                     User.CreatedAt = DateTime.Now;
                     User.CreatedBy = HttpContext.User.Identity.Name;
