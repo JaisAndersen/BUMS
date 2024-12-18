@@ -1,7 +1,7 @@
 ﻿@page
 @model BUMS.UpdateUserModel
 @{
-    ViewData["Title"] = "Update User";
+    ViewData["Title"] = "Edit User";
 }
 <h1>Edit User</h1>
 <form method="post">
@@ -16,7 +16,7 @@
         <span asp-validation-for="@Model.User.UserNavigationID" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.User.Email" class="control-label">Username</label>
+        <label asp-for="@Model.User.Email" class="control-label">User email</label>
         <input asp-for="@Model.User.Email" class="form-control" readonly/>
         <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <p></p>
     <div class="form-group">
-        <input type="submit" value="Submit" class="custom-btn" />
+        <input type="submit" value="Update" class="custom-btn" />
     </div>
     <div>
         <a asp-page="GetUser">Back to users</a>
