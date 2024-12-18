@@ -52,10 +52,12 @@ namespace BUMS
                 return Page();
             }
             else{
+                User.UserNavigationID = AddUserNavID();
                 var result = await userManager.CreateAsync(User, User.Password);
 
                 if(result.Succeeded){
                     Bools(User);
+
                     User.CreatedAt = DateTime.Now;
                     User.CreatedBy = HttpContext.User.Identity.Name;
 
@@ -75,9 +77,19 @@ namespace BUMS
                     }
                     return Page();
                 }
-
                 return RedirectToPage("GetUser");
             }            
+        }
+
+        private int AddUserNavID(){
+            List<User> users = service.GetUsers().ToList();
+            List<int> navIds = new List<int>();
+
+            foreach(User user in users){
+                navIds.Add(user.UserNavigationID);
+            }
+            int newNavId = navIds.Max();
+            return newNavId + 1;
         }
 
         private void Bools(User? user){
