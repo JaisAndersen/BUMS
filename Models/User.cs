@@ -6,6 +6,9 @@ namespace BUMS
 {
     public class User : IdentityUser
     {
+        public User(){
+        }
+
         //public int UserID { get; set; }
         [Display(Name ="User ID")]
         public int UserNavigationID { get; set; }

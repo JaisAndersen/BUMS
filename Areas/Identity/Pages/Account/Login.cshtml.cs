@@ -28,6 +28,8 @@ namespace BUMS.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
+        
+        public string loginError = "";
         [BindProperty]
         public User User { get; set; }
 

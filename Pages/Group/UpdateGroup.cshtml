@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Update Group";
 }
-<h3>Update Group</h3>
+<h3>Edit Group</h3>
 <form method="post">
     <div class="form-group">
         <label asp-for="@Model.Group.GroupID" class="control-label">Group ID</label>
@@ -17,9 +17,9 @@
     </div>
     <p></p>
     <div class="form-group">
-        <input type="submit" value="Submit" class="custom-btn" />
+        <input type="submit" value="Update" class="custom-btn" />
     </div>
     <div>
-        <a asp-page="GetUser">Back to Groups</a>
+        <a asp-page="/Group/GetGroup">Back to Groups</a>
     </div>
 </form>

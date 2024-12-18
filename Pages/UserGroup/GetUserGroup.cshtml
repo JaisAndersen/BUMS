@@ -1,7 +1,7 @@
 ﻿@page
 @model BUMS.GetUserGroupModel
 @{
-    ViewData["Title"] = "User groups";
+ViewData["Title"] = "User groups";
 }
 <h3>UserGroups</h3>
 <table class="table">
@@ -13,16 +13,13 @@
         </tr>
     </thead>
     <tbody>
-
-        @if (Model.UserGroups!= null)
-        {
-          @foreach (var item in Model.UserGroups)
-          {
+        @if (Model.UserGroups!= null){
+        @foreach (UserGroup ug in Model.UserGroups){
         <tr>
-            <td>@item?.UserGroupID </td>
-            <td>@item?.User?.UserNavigationID</td>
-            <td>@item?.GroupID</td>
+            <td>@ug?.UserGroupID </td>
+            <td>@ug?.User?.UserName</td>
+            <td>@Model.GetGroup(ug.GroupID).GroupName</td>
         </tr>
-            }
+        }
         }
 </table>
