@@ -34,17 +34,19 @@ namespace BUMS
             this.service = service;
 
         }
-        public void OnGet(string? uid, int? gid)
+        public IActionResult OnGet(string? uid, int? gid)
         {
+            if (!IsAdmin) return Forbid();
             UId = uid;
             GId = gid;
 
             Group = groupService.GetGroupById(gid);
             User = userService.GetUserById(uid);
+
+            return Page();
         }
         public IActionResult OnPost(string? uid, int gid)
         {
-            if (!IsAdmin) return Forbid();
             User = userService.GetUserById(uid);
             Group = groupService.GetGroupById(gid);
 
@@ -54,19 +56,28 @@ namespace BUMS
             //{
             //    return Page();
             //}
-            foreach (UserGroup ug in User.UserGroup)
-            {
-                if (ug.GroupID != UserGroup.GroupID)
-                {
-                    service.AddUserGroup(UserGroup);
-                }
 
-                else
+            if (User.UserGroup.Count == 0)
+            {
+                service.AddUserGroup(UserGroup);
+            }
+            else
+            {
+                foreach (UserGroup ug in User.UserGroup)
                 {
-                    errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
-                    return Page();
+                    if (ug.GroupID != UserGroup.GroupID)
+                    {
+                        service.AddUserGroup(UserGroup);
+                    }
+
+                    else
+                    {
+                        errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
+                        return Page();
+                    }
                 }
             }
+            
             return RedirectToPage("GetUserGroup");
         }
     }
