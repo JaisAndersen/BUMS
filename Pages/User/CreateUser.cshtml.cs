@@ -55,6 +55,7 @@ namespace BUMS
                 var result = await userManager.CreateAsync(User, User.Password);
 
                 if(result.Succeeded){
+                    Bools(User);
                     User.CreatedAt = DateTime.Now;
                     User.CreatedBy = HttpContext.User.Identity.Name;
 
@@ -77,6 +78,12 @@ namespace BUMS
 
                 return RedirectToPage("GetUser");
             }            
+        }
+
+        private void Bools(User? user){
+            user.EmailConfirmed = true;
+            user.PhoneNumberConfirmed = false;
+            user.TwoFactorEnabled = false;
         }
     }
 }
