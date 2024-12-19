@@ -56,9 +56,11 @@ ViewData["Title"] = "Users";
             <td>@item.UpdatedAt</td>
             <td>@item.UpdatedBy</td>
                     }
-                    <td>
-                        <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
-                    </td>
+            @if(Model.GId == 0){
+            <td>
+                <a asp-page="/User/ShowUserGroup" asp-route-uid="@item.Id"> See groups </a>
+            </td>
+            }
             @if (Model.IsAdmin)
                     {
                         <td>
