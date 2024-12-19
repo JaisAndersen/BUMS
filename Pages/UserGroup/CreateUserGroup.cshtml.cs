@@ -26,8 +26,8 @@ namespace BUMS
         public int? GId { get; set; }
 
         public CreateUserGroupModel(IUserGroupService service, 
-            IUserService userService, 
-            IGroupService groupService)
+                IUserService userService, 
+                IGroupService groupService)
         {
             this.userService = userService;
             this.groupService = groupService;
@@ -57,27 +57,18 @@ namespace BUMS
             //    return Page();
             //}
 
-            if (User.UserGroup.Count == 0)
-            {
+            List<int> groups = new List<int>();
+            foreach(UserGroup ug in User.UserGroup){
+                groups.Add(ug.GroupID);
+            }
+            if(!groups.Contains(UserGroup.GroupID)){
                 service.AddUserGroup(UserGroup);
             }
-            else
-            {
-                foreach (UserGroup ug in User.UserGroup)
-                {
-                    if (ug.GroupID != UserGroup.GroupID)
-                    {
-                        service.AddUserGroup(UserGroup);
-                    }
-
-                    else
-                    {
-                        errorMessage = $"{User.UserName} is already a party member of {Group.GroupName}";
-                        return Page();
-                    }
-                }
+            else{
+                errorMessage = $"{User.UserName} is already a member of {groupService.GetGroupById(gid).GroupName}";
+                return Page();
             }
-            
+
             return RedirectToPage("GetUserGroup");
         }
     }
