@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace BUMS
-{
-    public class User : IdentityUser
-    {
+namespace BUMS{
+    public class User : IdentityUser{
         public User(){
         }
 
@@ -31,8 +29,6 @@ namespace BUMS
         public DateTime UpdatedAt { get; set; }
 
         public string? UpdatedBy { get; set; }
-
-
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]

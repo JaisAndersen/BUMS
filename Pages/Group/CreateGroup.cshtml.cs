@@ -3,43 +3,44 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BUMS
-{
+namespace BUMS{
     [Authorize]
-    public class CreateGroupModel : PageModel
-    {
-        [BindProperty]
-        public Group? Group { get; set; }
-        private IGroupService service;
-        private BUMSDbContext context;
+    public class CreateGroupModel(IGroupService service,BUMSDbContext context) : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
-        public SelectList SelectListAccess {get;set;}
+        private IGroupService Service => service;
+        private BUMSDbContext Context => context;
 
-        public CreateGroupModel(IGroupService service, BUMSDbContext context)
-        {
-            this.context = context;
-            this.service = service;
-            
-            SelectListAccess = new SelectList(context.Access, "AccessID","AccessName",selectedValue: typeof(Access));
-        }        
-        public IActionResult OnGet()
-        {
+        [BindProperty]
+        public Group? Group { get; set; }
+        [BindProperty]
+        public int SelectedValue { get; set; }
+
+        public SelectList? SelectListAccess {get;set;}
+
+        public List<Access?>? Accesses {get;set;}
+
+        public IActionResult OnGet(){
+            Accesses = context.Access.ToList();
+            SelectListAccess = new SelectList(Accesses,"AccessID","AccessName");
+            SelectedValue = 0;
+
             return Page();
         }
+
         public IActionResult OnPost(Group group){
             if (!IsAdmin) return Forbid();
-            if (!ModelState.IsValid)
-            {
+
+            if (!ModelState.IsValid){
                 return Page();
             }
+
             group.CreatedAt = DateTime.Now;
             group.CreatedBy = HttpContext.User.Identity.Name;
-            group.AccessID = 1;
-            service.AddGroup(group);
-            return RedirectToPage("GetGroup");
-        }
+            group.AccessID = SelectedValue;
 
-        
+            service.AddGroup(group);
+            return new RedirectToPageResult("GetGroup");
+        }
     }
 }

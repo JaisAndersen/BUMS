@@ -11,11 +11,15 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            @if(Model.errorMessage.Length > 0)
-            {
+            @if(Model.errorMessage.Length > 0){
                 <div>
                     <label class="text-danger">@Model.errorMessage</label>
                 </div>
+            }
+            @if(Model.groupHasAdminClaim.Length > 0){
+            <div>
+                <label class="text-danger">@Model.groupHasAdminClaim</label>
+            </div>
             }
             <div asp-validation-summary="  ModelOnly  " class="text-danger">
             </div>

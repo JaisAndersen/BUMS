@@ -1,37 +1,42 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
 
-namespace BUMS
-{
+namespace BUMS{
     [Authorize]
-    public class UpdateGroupModel : PageModel
-    {
-        [BindProperty]
-        public Group? Group { get; set; }
-        private IGroupService service;
+    public class UpdateGroupModel : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
-        public UpdateGroupModel(IGroupService service)
-        {
+        [BindProperty]
+        public Group? Group { get; private set; }
+
+        [BindProperty]
+        public string? UpdatedName {get;set;}
+
+        private readonly IGroupService service;
+
+        public UpdateGroupModel(IGroupService service){
             this.service = service;
         }
-        public IActionResult OnGet(int id)
-        {
+
+        public IActionResult OnGet(int id){
+            if (!IsAdmin) return Forbid();
+
             Group = service.GetGroupById(id);
 
             return Page();
         }
 
-        public IActionResult OnPost()
-        {
-            if (!IsAdmin) return Forbid();
-            if (!ModelState.IsValid)
-            {
+        public IActionResult OnPost(int id){
+            if (!ModelState.IsValid){
                 return Page();
             }
-            service.UpdateGroup(Group, Group.GroupName, HttpContext.User.Identity.Name);
-            return RedirectToPage("GetGroup");
+
+            Group = service.GetGroupById(id);
+
+            service.UpdateGroup(Group, Group?.GroupName, HttpContext?.User?.Identity?.Name);
+
+            return new RedirectToPageResult("GetGroup");
         }
     }
 }

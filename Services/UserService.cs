@@ -1,66 +1,56 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 
-namespace BUMS
-{
-    public class UserService : IUserService{
-        private BUMSDbContext context;
-        
-        public UserService(BUMSDbContext service){
-            context = service;
-        }
-        public async Task<IActionResult> AddUserAsync(User? user)
-        {
+namespace BUMS{
+    public class UserService(BUMSDbContext context) : IUserService{
+        private BUMSDbContext Context => context;
+
+        public void AddUser(User? user){
             user.UserNavigationID = GetUsers().ToList().Count() + 1;
             Bools(user);
-            
-            context?.Users?.AddAsync(user);
-            context?.SaveChanges();
-            return null;
+
+            Context?.Users?.Add(user);
+            Context?.SaveChanges();
         }
-        public User? GetUserById(string? id)
-        {
-            User? user = context?.Users?
+
+        public User? GetUserById(string? id){
+            User? user = Context?.Users?
                 .Include(u => u.UserGroup).ThenInclude(g => g.Group)
                 .AsNoTracking()
                 .FirstOrDefault(m => m.Id == id);
             return user;
         }
-        public void DeleteUser(User? user)
-        {
-            if (user != null)
-            {
-                context?.Users?.Remove(GetUserById(user.Id));
-                context?.SaveChanges();
+
+        public void DeleteUser(User? user){
+            if (user != null){
+                Context?.Users?.Remove(GetUserById(user.Id));
+                Context?.SaveChanges();
             }
         }
-        public IEnumerable<User?> GetUser(string? filter)
-        {
-            return this.context.Set<User>().Where(s => s.UserName.Contains(filter)).AsNoTracking().ToList();
-        }
-        public IEnumerable<User?>? GetUsers()
-        {            
-            return context?.Users;
+
+        public IEnumerable<User?>? GetUser(string? filter){
+            return Context.Set<User>().Where(s => s.UserName.Contains(filter)).AsNoTracking().ToList();
         }
 
-        public void UpdateUser(User? user, string? userName, string? updatedBy)
-        {
-            using (context)
-            {
-                var entity = context?.Users?.FirstOrDefault(item => item.Id == user.Id);
-                if (entity != null)
-                {
-                    entity.UserName = userName;
-                    entity.Email = user.Email;
-                    entity.UpdatedAt = DateTime.Now;
-                    entity.UpdatedBy = updatedBy;
-                    context?.SaveChanges();
+        public IEnumerable<User?>? GetUsers(){
+            return Context?.Users;
+        }
+
+        public void UpdateUser(User? user, string? userName, string? updatedBy){
+            using(Context){
+                var updateUser = Context?.Users?.FirstOrDefault(u => u.Id == user.Id);
+
+                if (updateUser != null){
+                    updateUser.UserName = userName;
+                    updateUser.Email = user.Email;
+                    updateUser.UpdatedAt = DateTime.Now;
+                    updateUser.UpdatedBy = updatedBy;
+
+                    Context?.SaveChanges();
                 }
             }
         }
 
-        private void Bools(User? user){
+        private static void Bools(User? user){
             user.EmailConfirmed = true;
             user.PhoneNumberConfirmed = false;
             user.TwoFactorEnabled = false;

@@ -4,7 +4,7 @@ namespace BUMS
 {
     public interface IUserService
     {
-        public Task<IActionResult> AddUserAsync(User? user);
+        public void AddUser(User? user);
 
         public User? GetUserById(string? ID);
 

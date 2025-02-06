@@ -1,5 +1,7 @@
 ﻿@page
 @model BUMS.GetUserGroupModel
+@inject IUserService UserService
+@inject IGroupService GroupService
 @{
 ViewData["Title"] = "User groups";
 }
@@ -19,6 +21,9 @@ ViewData["Title"] = "User groups";
             <td>@ug?.UserGroupID </td>
             <td>@ug?.User?.UserName</td>
             <td>@Model.GetGroup(ug.GroupID).GroupName</td>
+            <td>
+                <a asp-page="/UserGroup/DeleteUserGroup" asp-route-id="@ug.UserGroupID">Delete</a>
+            <td>
         </tr>
         }
         }

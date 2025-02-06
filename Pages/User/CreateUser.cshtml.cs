@@ -5,39 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
-namespace BUMS
-{
+namespace BUMS{
     [Authorize]
-    public class CreateUserModel : PageModel
-    {
-        private IUserStore<User> userStore;
-        private SignInManager<User> signInManager;
-        private UserManager<User> userManager;
-        private IConfiguration configuration;
+    public class CreateUserModel(
+            IUserService? service,
+            IUserStore<User?>? userStore,
+            UserManager<User?>? userManager,
+            SignInManager<User?>? signInManager,
+            IConfiguration? configuration): PageModel{
+
+        IUserService? Service => service;
+        IUserStore<User?>? UserStore => userStore;
+        UserManager<User?>? UserManager => userManager;
+        SignInManager<User?>? SignInManger => signInManager;
+        IConfiguration? Configuration => configuration;
 
         [BindProperty]
-        public User? User { get; set; }
+        public User? UserModel { get; set; }
 
         public string Creator { get; set; }
 
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
-        public IList<AuthenticationScheme> ExternalLogins { get;set; }
+        public IList<AuthenticationScheme?>? ExternalLogins { get;private set; }
 
-        IUserService service;
-        public CreateUserModel(
-                IUserService service,
-                IUserStore<User> userStore,
-                SignInManager<User> signInManager,
-                UserManager<User> userManager,
-                IConfiguration configuration)
-        {
-            this.configuration = configuration;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.userStore = userStore;
-            this.service = service;
-        }
+
         public async Task<IActionResult> OnGetAsync(){
             if (!IsAdmin) return Forbid();
 
@@ -45,6 +37,7 @@ namespace BUMS
 
             return Page();   
         }
+
         public async Task<IActionResult> OnPost(){
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -52,24 +45,24 @@ namespace BUMS
                 return Page();
             }
             else{
-                var result = await userManager.CreateAsync(User, User.Password);
+                var result = await userManager.CreateAsync(UserModel, UserModel.Password);
 
                 if(result.Succeeded){
-                    Bools(User);
-                    User.UserNavigationID = AddUserNavID();
+                    Bools(UserModel);
+                    UserModel.UserNavigationID = AddUserNavID();
 
-                    User.CreatedAt = DateTime.Now;
-                    User.CreatedBy = HttpContext.User.Identity.Name;
+                    UserModel.CreatedAt = DateTime.Now;
+                    UserModel.CreatedBy = HttpContext?.User?.Identity?.Name;
 
-                    await userStore.SetUserNameAsync(User, User.UserName, CancellationToken.None);
-                    await userManager.AddPasswordAsync(User,User.Password);
+                    await userStore.SetUserNameAsync(UserModel, UserModel.UserName, CancellationToken.None);
+                    await userManager.AddPasswordAsync(UserModel,UserModel.Password);
 
-                    //await signInManager.SignInAsync(User,isPersistent:false);
-                    //await service.AddUserAsync(User);
+                    //await signInManager.SignInAsync(UserModel,isPersistent:false);
+                    //await service.AddUserAsync(UserModel);
 
-                    string adminEmail = configuration["AdminEmail"] ?? string.Empty;
-                    bool isAdmin = string.Compare(User.Email, adminEmail, true) == 0 ? true : false;
-                    await userManager.AddClaimAsync(User, new Claim("IsAdmin",isAdmin.ToString()));
+                    string adminEmail = Configuration?["AdminEmail"] ?? string.Empty;
+                    bool isAdmin = string.Compare(UserModel.Email, adminEmail, true) == 0 ? true : false;
+                    await userManager.AddClaimAsync(UserModel, new Claim("IsAdmin",isAdmin.ToString()));
                 }
                 else{
                     foreach(var error in result.Errors){
@@ -82,17 +75,17 @@ namespace BUMS
         }
 
         private int AddUserNavID(){
-            List<User> users = service.GetUsers().ToList();
+            List<User?>? users = service?.GetUsers()?.ToList();
             List<int> navIds = new List<int>();
 
-            foreach(User user in users){
+            foreach(User? user in users){
                 navIds.Add(user.UserNavigationID);
             }
             int newNavId = navIds.Max();
             return newNavId + 1;
         }
 
-        private void Bools(User? user){
+        private static void Bools(User? user){
             user.EmailConfirmed = true;
             user.PhoneNumberConfirmed = false;
             user.TwoFactorEnabled = false;

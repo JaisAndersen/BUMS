@@ -8,10 +8,14 @@ namespace BUMS
     {
         [BindProperty]
         public IEnumerable<UserGroup>? UserGroups { get; set; }
+        [BindProperty]
+        public Group Group { get; set; }
 
         private IGroupService groupService;
         IUserGroupService service;
-        public GetUserGroupModel(IUserGroupService service, IGroupService groupService)
+        public GetUserGroupModel(
+            IUserGroupService service,
+            IGroupService groupService)
         {
             this.groupService = groupService;
             this.service = service;
@@ -19,6 +23,7 @@ namespace BUMS
         public async Task<IActionResult> OnGet()
         {
             UserGroups = service.GetUserGroups().ToList();
+
             return Page();
         }
         public Group GetGroup(int groupID)

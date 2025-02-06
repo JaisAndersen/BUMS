@@ -1,35 +1,35 @@
 ﻿@page
 @model BUMS.ShowUserGroupModel
+@inject IGroupService GroupService
 @{
 }
 
-<h3 style="color:black">Groups</h3>
+<h3 style="color:black">Groups @Model.UserModel is part of</h3>
 <div>
     <dl class="row">     
         <dd class="col-sm-10">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Group Name</th>
-                    <th>UserGroup</th>
-                </tr>
+                    <tr>
+                        <th>Group Name</th>
+                        <th>UserGroup</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.User.UserGroup)
-                {
-                <tr>
-                    <th>@Html.DisplayFor(modelItem => item.Group.GroupName)</th>
-                    <td>@item.UserGroupID</td>
-                </tr>
-                }
-
+                    @foreach (UserGroup ug in Model.UserModel.UserGroup)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => ug.Group.GroupName)</td>
+                        <td>@ug.UserGroupID</td>
+                    </tr>
+                    }
                 </tbody>
             </table>
             @if (Model.IsAdmin)
             {
             <p>
                 Add user to a group? Please Click here:
-                <a asp-page="/Group/GetGroup" asp-route-uid="@Model.User.Id">Add to a group</a>
+                <a asp-page="/Group/GetGroup" asp-route-uid="@Model.UserModel.Id">Add to a group</a>
             </p>
             }
         </dd>

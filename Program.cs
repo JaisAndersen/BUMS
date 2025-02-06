@@ -1,23 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace BUMS
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+namespace BUMS{
+    public class Program{
+        public static void Main(string[] args){
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("BumsConnection") ?? throw new InvalidOperationException("Connection string 'BumsConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("LocalBumsConnection") ?? throw new InvalidOperationException("Connection string 'BumsConnection' not found.");
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddDbContext<BUMSDbContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BUMSDbContext>();
+            builder.Services.AddDbContext<BUMSDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            });
+
+            builder.Services.AddDefaultIdentity<User>(options =>
+                    options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<BUMSDbContext>();
+
             builder.Services.AddTransient<IGroupService, GroupService>();
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddTransient<IUserGroupService, UserGroupService>();
-            
+            builder.Services.AddTransient<IAccessService, AccessService>();
+
             builder.Services.AddAuthorization(options =>
                     options.AddPolicy("Admin", policy =>
                         policy.RequireAuthenticatedUser()

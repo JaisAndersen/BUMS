@@ -12,24 +12,24 @@
             <div asp-validation-summary="  ModelOnly  " class="text-danger">
             </div>
             <div class="form-group">
-                <label asp-for="@Model.User.UserName" class="control-label"></label>
-                <input asp-for="@Model.User.UserName" class="form-control" />
-                <span asp-validation-for="@Model.User.UserName" class="text-danger"></span>
+                <label asp-for="@Model.UserModel.UserName" class="control-label"></label>
+                <input asp-for="@Model.UserModel.UserName" class="form-control" />
+                <span asp-validation-for="@Model.UserModel.UserName" class="text-danger"></span>
             </div>    
             <div class="form-group">
-                <label asp-for="@Model.User.Email" class="control-label"></label>
-                <input asp-for="@Model.User.Email" class="form-control" />
-                <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+                <label asp-for="@Model.UserModel.Email" class="control-label"></label>
+                <input asp-for="@Model.UserModel.Email" class="form-control" />
+                <span asp-validation-for="@Model.UserModel.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.User.Password"></label>
-                <input asp-for="@Model.User.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <span asp-validation-for="@Model.User.Password" class="text-danger"></span>
+                <label asp-for="@Model.UserModel.Password"></label>
+                <input asp-for="@Model.UserModel.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <span asp-validation-for="@Model.UserModel.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.User.ConfirmPassword"></label>
-                <input asp-for="@Model.User.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <span asp-validation-for="@Model.User.ConfirmPassword" class="text-danger"></span>
+                <label asp-for="@Model.UserModel.ConfirmPassword"></label>
+                <input asp-for="@Model.UserModel.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <span asp-validation-for="@Model.UserModel.ConfirmPassword" class="text-danger"></span>
             </div>
             <p></p>
             <div class="form-group">

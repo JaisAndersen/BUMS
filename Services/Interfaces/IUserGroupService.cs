@@ -1,9 +1,12 @@
-﻿namespace BUMS
+﻿using Microsoft.AspNetCore.Mvc;
+namespace BUMS
 {
     public interface IUserGroupService
     {
         public IEnumerable<UserGroup?>? GetUserGroups();
+        public Task<UserGroup?> GetUserGroupByID(int id);
         public void AddUserGroup(UserGroup? userGroup);
-        public bool IsUserInGroup(User? user, Group? group, UserGroup? userGroup);
+        public Task<IActionResult> DeleteUserGroupAsync(UserGroup? userGroup);
+        public Task<IActionResult> AddUserGroupAsync(UserGroup? userGroup);
     }
 }

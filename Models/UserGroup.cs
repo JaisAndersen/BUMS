@@ -1,7 +1,5 @@
-﻿namespace BUMS
-{
-    public class UserGroup
-    {
+﻿namespace BUMS{
+    public class UserGroup{
         public int? UserGroupID { get; set; }
         public User User { get; set; }
         public string UserID { get; set; }

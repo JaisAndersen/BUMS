@@ -1,22 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BUMS
-{
-    public class ShowUserGroupModel : PageModel
-    {
+namespace BUMS{
+    public class ShowUserGroupModel(IUserService service) : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
-        IUserService service;
-        public ShowUserGroupModel(IUserService service)
-        {
-            this.service = service;
-        }
+
         [BindProperty]
-        public User User { get; set; }
-        public IActionResult OnGet(string? uid)
-        {
-            User = service.GetUserById(uid);
-            if (User == null)
+        public User? UserModel { get; set; }
+
+        IUserService? Service => service;
+
+        public IActionResult OnGet(string? uid){
+            UserModel = Service?.GetUserById(uid);
+            if (UserModel == null)
             {
                 return NotFound();
             }

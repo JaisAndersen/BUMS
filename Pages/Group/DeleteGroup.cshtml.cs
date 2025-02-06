@@ -1,31 +1,52 @@
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Identity;
 
-namespace BUMS
-{
+namespace BUMS{
     [Authorize]
-    public class DeleteGroupModel : PageModel
-    {
-        [BindProperty]
-        public Group? group { get; set; }
+    public class DeleteGroupModel : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
-        IGroupService service;
+        [BindProperty]
+        public Group? Group { get; set; }
 
-        public DeleteGroupModel(IGroupService service)
-        {
+        [BindProperty]
+        public User? User {get;set;}
+
+        [BindProperty]
+        public List<UserGroup?>? UserGroups {get;set;}
+
+        private readonly IGroupService service;
+        private readonly IUserService userService;
+        private readonly UserManager<User> userManager;
+
+        public DeleteGroupModel(
+                IGroupService service,
+                IUserService userService,
+                UserManager<User> userManager){
+            this.userManager = userManager;
+            this.userService = userService;
             this.service = service;
+
+            UserGroups = Group?.UserGroups?.ToList();
         }
-        public void OnGet(int id)
-        {
-            group = service.GetGroupById(id);
-        }
-        public IActionResult OnPost()
-        {
+
+        public IActionResult OnGet(int id){
             if (!IsAdmin) return Forbid();
-            service.DeleteGroup(group);
-            return RedirectToPage("GetGroup");
+            Group = service.GetGroupById(id);
+            return Page();
+        }
+
+        public async Task<RedirectToPageResult> OnPost(){
+            foreach(UserGroup ug in UserGroups){
+                var claims = await userManager.GetClaimsAsync(userService.GetUserById(ug.UserID));
+                var result = await userManager.RemoveClaimsAsync(userService.GetUserById(ug.UserID), claims);
+            }
+
+            service.DeleteGroup(Group);
+
+            return new RedirectToPageResult("GetGroup");
         }
     }
 }
