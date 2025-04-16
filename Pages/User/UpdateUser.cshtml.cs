@@ -8,7 +8,7 @@ namespace BUMS{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
         [BindProperty]
-        public User? User { get; set; }
+        public new User? User { get; set; }
         private IUserService Service => service;
 
         public IActionResult OnGet(string id){
@@ -20,7 +20,9 @@ namespace BUMS{
         }
 
         public IActionResult OnPost(){
-            Service.UpdateUser(User, User.UserName, HttpContext?.User?.Identity?.Name);
+            if(User != null){
+                Service.UpdateUser(User, User.UserName, HttpContext?.User?.Identity?.Name);
+            }
 
             return new RedirectToPageResult("GetUser");
         }

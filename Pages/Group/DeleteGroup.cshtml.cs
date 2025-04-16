@@ -12,10 +12,10 @@ namespace BUMS{
         public Group? Group { get; set; }
 
         [BindProperty]
-        public User? User {get;set;}
+        public new User? User {get;set;}
 
         [BindProperty]
-        public List<UserGroup?>? UserGroups {get;set;}
+        public List<UserGroup>? UserGroups {get;set;}
 
         private readonly IGroupService service;
         private readonly IUserService userService;
@@ -39,12 +39,17 @@ namespace BUMS{
         }
 
         public async Task<RedirectToPageResult> OnPost(){
-            foreach(UserGroup ug in UserGroups){
-                var claims = await userManager.GetClaimsAsync(userService.GetUserById(ug.UserID));
-                var result = await userManager.RemoveClaimsAsync(userService.GetUserById(ug.UserID), claims);
-            }
+            if(UserGroups != null){
+                foreach(UserGroup ug in UserGroups){
+                    User? user = userService.GetUserById(ug.UserID);
+                    if(user != null){
+                        var claims = await userManager.GetClaimsAsync(user);
+                        var result = await userManager.RemoveClaimsAsync(user, claims);
+                    }
+                }
 
-            service.DeleteGroup(Group);
+                service.DeleteGroup(Group);
+            }
 
             return new RedirectToPageResult("GetGroup");
         }

@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace BUMS
-{
-    public class Group
-    {
+namespace BUMS {
+    public class Group {
         [Display(Name = "Group ID")]
         public int GroupID { get; set; }
 
@@ -27,6 +25,6 @@ namespace BUMS
         public int AccessID { get; set; }
 
         [ValidateNever]
-        public virtual ICollection<UserGroup>? UserGroups { get; set; }
+        public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
     }
 }

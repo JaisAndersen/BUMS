@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Update Group";
 }
+@if(Model.Group != null){
 <h3>Edit Group</h3>
 <form method="post">
     <div class="form-group">
@@ -23,3 +24,4 @@
         <a asp-page="/Group/GetGroup">Back to Groups</a>
     </div>
 </form>
+}

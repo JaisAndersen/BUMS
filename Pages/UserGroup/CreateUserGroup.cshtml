@@ -6,17 +6,18 @@
     ViewData["Title"] = "Create new UserGroup";
 }
 
-<h1>Add user: "@Model.User.UserName" to group: "@Model.Group.GroupName"</h1>
+<h1>Add user: "@Model?.User?.UserName" to group: "@Model?.Group?.GroupName"</h1>
 
+@if(Model != null && Model.User != null && Model.Group != null){
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            @if(Model.errorMessage.Length > 0){
-                <div>
-                    <label class="text-danger">@Model.errorMessage</label>
-                </div>
+            @if(Model.errorMessage?.Length > 0){
+            <div>
+                <label class="text-danger">@Model.errorMessage</label>
+            </div>
             }
-            @if(Model.groupHasAdminClaim.Length > 0){
+            @if(Model.groupHasAdminClaim?.Length > 0){
             <div>
                 <label class="text-danger">@Model.groupHasAdminClaim</label>
             </div>
@@ -25,11 +26,6 @@
             </div>
             <p></p>
             <h5>User</h5>
-            @* <div class="form-group">
-                <label asp-for="@Model.User.Id" class="control-label" hidden></label>
-                <input asp-for="@Model.User.Id" class="form-control" hidden/>
-                <span asp-validation-for="@Model.User.Id" class="text-danger" hidden></span>
-            </div> *@
             <div class="form-group">
                 <label asp-for="@Model.User.UserNavigationID" class="control-label" readonly></label>
                 <input asp-for="@Model.User.UserNavigationID" class="form-control" readonly />
@@ -76,3 +72,4 @@
         </form>
     </div>
 </div>
+}

@@ -9,15 +9,12 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BUMS.Migrations
-{
+namespace BUMS.Migrations {
     [DbContext(typeof(BUMSDbContext))]
     [Migration("20241216113149_Mig")]
-    partial class Mig
-    {
+    partial class Mig {
         /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
+        protected override void BuildTargetModel(ModelBuilder modelBuilder) {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.11")

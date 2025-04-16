@@ -1,5 +1,4 @@
 using BUMS.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,11 +14,14 @@ namespace BUMS.Pages{
             _context = context;
         }
        
-        public CounterViewModel Counter { get; set;}
+        public CounterViewModel? Counter { get; set;}
 
         public async Task OnGetAsync(){
-            Counter = new CounterViewModel
-            {
+            if(this._context.Groups == null){
+                throw new ArgumentNullException("Unable to process");
+            }
+
+            Counter = new CounterViewModel {
                 UserCount = await _context.Users.CountAsync(),
                 GroupCount = await _context.Groups.CountAsync(),
             };

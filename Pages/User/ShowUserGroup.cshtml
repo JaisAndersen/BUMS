@@ -16,20 +16,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (UserGroup ug in Model.UserModel.UserGroup)
-                    {
+                    @foreach (UserGroup ug in Model.UserModel?.UserGroup ?? Enumerable.Empty<UserGroup>()) {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => ug.Group.GroupName)</td>
-                        <td>@ug.UserGroupID</td>
+                            @if(ug.Group != null){
+                            <td>@Html.DisplayFor(modelItem => ug.Group.GroupName ?? "No Group Name")</td>
+                            <td>@ug.UserGroupID</td>
+                            }
                     </tr>
                     }
                 </tbody>
             </table>
-            @if (Model.IsAdmin)
-            {
+            @if (Model.IsAdmin) {
             <p>
                 Add user to a group? Please Click here:
+                @if(Model.UserModel != null){
                 <a asp-page="/Group/GetGroup" asp-route-uid="@Model.UserModel.Id">Add to a group</a>
+                }
             </p>
             }
         </dd>

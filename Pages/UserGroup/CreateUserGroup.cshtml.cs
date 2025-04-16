@@ -23,7 +23,7 @@ namespace BUMS{
         [BindProperty]
         public Group? Group { get; set; }
         [BindProperty]
-        public User? User { get; set; }
+        public new User? User { get; set; }
         [BindProperty]
         public Access? Access { get; set; }
 
@@ -48,7 +48,7 @@ namespace BUMS{
 
         }
 
-        public async Task<IActionResult> OnGet(string? uid, int? gid){
+        public IActionResult OnGet(string? uid, int gid){
             if (!IsAdmin) return Forbid();
             UId = uid;
             GId = gid;
@@ -56,30 +56,44 @@ namespace BUMS{
             Group = groupService.GetGroupById(gid);
             User = userService.GetUserById(uid);
 
-            switch(Group.AccessID){
-                case 1:
-                    groupHasAdminClaim = $"{Group.GroupName} is an Admin group";
-                    break;
-                case 2:
-                    groupHasAdminClaim = $"{Group.GroupName} is an UserAdmin group";
-                    break;
-                case 3:
-                    groupHasAdminClaim = $"{Group.GroupName} is an User group";
-                    break;
+            if(Group != null){
+                switch(Group.AccessID){
+                    case 1:
+                        groupHasAdminClaim = $"{Group.GroupName} is an Admin group";
+                        break;
+                    case 2:
+                        groupHasAdminClaim = $"{Group.GroupName} is an UserAdmin group";
+                        break;
+                    case 3:
+                        groupHasAdminClaim = $"{Group.GroupName} is an User group";
+                        break;
+                }
             }
 
             return Page();
         }
 
         public async Task<IActionResult> OnPost(string? uid, int gid){
-            {
-                User = userService.GetUserById(uid);
-                Group = groupService.GetGroupById(gid);
-                Access = accessService.GetAccessById(Group.AccessID);
+            if(userManager == null){
+                throw new ArgumentNullException("UserManager is null");
+            }
+            User = userService.GetUserById(uid);
+            if(User == null){
+                throw new ArgumentNullException("User not found");
+            }
+
+            Group = groupService.GetGroupById(gid);
+            if(Group == null){
+                throw new ArgumentNullException("Group not found");
+            }
+
+            Access = accessService.GetAccessById(Group.AccessID);
+            if(Access == null){
+                throw new ArgumentNullException("Access not found");
             }
 
             List<int> groups = new List<int>();
-            foreach(UserGroup? ug in User?.UserGroup){
+            foreach(UserGroup? ug in User.UserGroup){
                 groups.Add(ug.GroupID);
             }
 

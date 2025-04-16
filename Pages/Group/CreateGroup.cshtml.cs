@@ -18,10 +18,10 @@ namespace BUMS{
 
         public SelectList? SelectListAccess {get;set;}
 
-        public List<Access?>? Accesses {get;set;}
+        public List<Access>? Accesses {get;set;}
 
         public IActionResult OnGet(){
-            Accesses = context.Access.ToList();
+            Accesses = context?.Access?.ToList();
             SelectListAccess = new SelectList(Accesses,"AccessID","AccessName");
             SelectedValue = 0;
 
@@ -36,7 +36,7 @@ namespace BUMS{
             }
 
             group.CreatedAt = DateTime.Now;
-            group.CreatedBy = HttpContext.User.Identity.Name;
+            group.CreatedBy = HttpContext.User?.Identity?.Name;
             group.AccessID = SelectedValue;
 
             service.AddGroup(group);

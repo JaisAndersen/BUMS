@@ -30,7 +30,7 @@ namespace BUMS.Areas.Identity.Pages.Account{
 
         public string loginError = "";
         [BindProperty]
-        public User User { get; set; }
+        public new User User { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -133,7 +133,7 @@ namespace BUMS.Areas.Identity.Pages.Account{
             //}
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            // return Page();
         }
     }
 }

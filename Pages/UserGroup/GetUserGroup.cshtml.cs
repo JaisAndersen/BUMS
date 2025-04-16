@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Text.RegularExpressions;
 
-namespace BUMS
-{
-    public class GetUserGroupModel : PageModel
-    {
+namespace BUMS {
+    public class GetUserGroupModel : PageModel {
         [BindProperty]
         public IEnumerable<UserGroup>? UserGroups { get; set; }
         [BindProperty]
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
 
         private IGroupService groupService;
         IUserGroupService service;
@@ -20,15 +17,18 @@ namespace BUMS
             this.groupService = groupService;
             this.service = service;
         }
-        public async Task<IActionResult> OnGet()
-        {
-            UserGroups = service.GetUserGroups().ToList();
+
+        public IActionResult OnGet(){
+            UserGroups = service?.GetUserGroups()?.ToList();
 
             return Page();
         }
-        public Group GetGroup(int groupID)
-        {
-            Group getGroup = groupService.GetGroupById(groupID);
+
+        public Group GetGroup(int groupID){
+            Group? getGroup = groupService.GetGroupById(groupID);
+            if(getGroup == null){
+                throw new ArgumentNullException("Group is null");
+            }
             return getGroup;
         }
     }

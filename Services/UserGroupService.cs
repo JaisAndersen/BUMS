@@ -10,31 +10,58 @@ namespace BUMS{
         }
 
         public async Task<UserGroup?> GetUserGroupByID(int id){
-                UserGroup? userGroup = await context?.UserGroups?
+            if(context.UserGroups != null){
+                UserGroup? userGroup = await context.UserGroups
                     .AsNoTracking()
                     .FirstOrDefaultAsync(m => m.UserGroupID == id);
-            return userGroup;
+                return userGroup;
+            }
+            else{
+                return null;
+            }
         }
 
-        public IEnumerable<UserGroup?>? GetUserGroups(){
+        public IEnumerable<UserGroup>? GetUserGroups(){
             return context?.UserGroups?.Include(s => s.User).AsNoTracking();
         }
 
         public void AddUserGroup(UserGroup? userGroup){
-            context?.UserGroups?.Add(userGroup);
-            context?.SaveChanges();
+            if(userGroup != null && context.UserGroups != null){
+                context.UserGroups.Add(userGroup);
+                context?.SaveChanges();
+            }
         }
         
         public async Task<IActionResult> DeleteUserGroupAsync(UserGroup? userGroup){
-            context?.UserGroups.Remove(userGroup);
-            await context?.SaveChangesAsync();
-            return null;
+            if(context == null){
+                throw new ArgumentNullException("Context is null");
+            }
+            if(userGroup == null){
+                throw new ArgumentNullException("Context is null");
+            }
+            if(context.UserGroups == null){
+                throw new InvalidOperationException("Context.UserGroups is null");
+            }
+
+            context.UserGroups.Remove(userGroup);
+            await context.SaveChangesAsync();
+            return new NoContentResult();
         }
 
         public async Task<IActionResult> AddUserGroupAsync(UserGroup? userGroup){
-            context?.UserGroups?.Add(userGroup);
-            await context?.SaveChangesAsync();
-            return null;
+            if(context == null){
+                throw new ArgumentNullException("Context is null");
+            }
+            if(userGroup == null){
+                throw new ArgumentNullException("Context is null");
+            }
+            if(context.UserGroups == null){
+                throw new InvalidOperationException("Context.UserGroups is null");
+            }
+
+            context.UserGroups.Add(userGroup);
+            await context.SaveChangesAsync();
+            return new NoContentResult();
         }
     }
 }

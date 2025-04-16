@@ -20,9 +20,9 @@ ViewData["Title"] = "User groups";
         <tr>
             <td>@ug?.UserGroupID </td>
             <td>@ug?.User?.UserName</td>
-            <td>@Model.GetGroup(ug.GroupID).GroupName</td>
+            <td>@Model.GetGroup(ug?.GroupID ?? 0)?.GroupName</td>
             <td>
-                <a asp-page="/UserGroup/DeleteUserGroup" asp-route-id="@ug.UserGroupID">Delete</a>
+                <a asp-page="/UserGroup/DeleteUserGroup" asp-route-id="@ug?.UserGroupID">Delete</a>
             <td>
         </tr>
         }

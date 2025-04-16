@@ -12,13 +12,13 @@ ViewData["Title"] = "Home page";
 
 <div class="card mx-auto" style="width: 25rem;">
     <img src="/Pictures/BUMSLogo.jpg" alt="BUMS Logo" class="card-img-top"> 
-    @if (Model.IsAdmin){
+    @if (Model.IsAdmin && @Model.Counter != null){
     <ul class="list-group list-group-flush">
         <li style="background-color: rgba(20, 52, 71); color: white;" class="list-group-item text-white text-center">
             <h2>Users in system: @Model.Counter.UserCount</h2>
         </li>
 
-        <li style="background-color: rgba(20, 52, 71); color: white;" class="list-group-item text-white text-center">
+        <li style="background-color: rgba(20, 52, 71); color: white; position:fixed;" class="list-group-item text-white text-center">
             <h2>Groups in system: @Model.Counter.GroupCount</h2>
         </li>
 

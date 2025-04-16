@@ -7,18 +7,22 @@ namespace BUMS{
     public class GetUserModel(IUserService service) : PageModel{
         public bool IsAdmin => HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
 
-        private IUserService Service => service;
+        private IUserService? Service => service;
 
         [BindProperty(SupportsGet = true)]
         public string? FilterCriteria { get; set; }
 
         public int GId { get; set; }
 
-        public IEnumerable<User?>? Users { get; set; }
+        public IEnumerable<User>? Users { get; set; }
 
-        public IEnumerable<UserGroup?>? UserGroups {get;private set;}
+        public IEnumerable<UserGroup>? UserGroups {get;private set;}
 
-        public ActionResult OnGet(int gid){
+        public ActionResult? OnGet(int gid){
+            if(Service == null){
+                throw new ArgumentNullException("IUserService in null");
+            }
+
             GId = gid;
 
             if (!String.IsNullOrEmpty(FilterCriteria)){

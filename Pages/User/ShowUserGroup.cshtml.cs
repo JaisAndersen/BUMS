@@ -12,8 +12,8 @@ namespace BUMS{
 
         public IActionResult OnGet(string? uid){
             UserModel = Service?.GetUserById(uid);
-            if (UserModel == null)
-            {
+
+            if (UserModel == null) {
                 return NotFound();
             }
             return Page();

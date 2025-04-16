@@ -3,18 +3,28 @@
 @using BUMS
 @inject IGroupService service
 @{
-    ViewData["Title"] = "Delete Group";
+ViewData["Title"] = "Delete Group";
 }
 <div>
     <hr/>
+    @if(@Model?.Group != null){
     <form method="post">
-        <dl class="row">
-            <dt class="col-sm-2">  @Html.DisplayNameFor(model => model.Group.GroupID)   </dt>
-            <dd class="col-sm-10">  @Model.Group.GroupID  </dd>
-            <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.Group.GroupName)  </dt>
-            <dd class="col-sm-10">  @Model.Group.GroupName  </dd>
-        </dl>
+        <table>
+            <thead>
+                <tr>
+                    <th>Group ID</th>
+                    <th>Group Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Group.GroupID</td>
+                    <td>@Model.Group.GroupName</td>
+                </tr>
+            </tbody>
+        </table>
         <input type="hidden" asp-for="Group.GroupID"/>
         <input type="submit" value="Delete" class="btn btn-danger"/>
     </form>
+    }
 </div>

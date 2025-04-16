@@ -4,6 +4,7 @@
     ViewData["Title"] = "Edit User";
 }
 <h1>Edit User</h1>
+@if(@Model.User != null){
 <form method="post">
     <div class="form-group">
         <label asp-for="@Model.User.Id" class="control-label" hidden>User ID</label>
@@ -33,3 +34,4 @@
         <a asp-page="GetUser">Back to users</a>
     </div>
 </form>
+}
